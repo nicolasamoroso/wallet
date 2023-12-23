@@ -55,6 +55,9 @@ devDependencies:
   eslint-config-next:
     specifier: 14.0.4
     version: 14.0.4(eslint@8.56.0)(typescript@5.3.3)
+  eslint-plugin-import-typescript:
+    specifier: ^0.0.4
+    version: 0.0.4
   postcss:
     specifier: ^8
     version: 8.4.32
@@ -1303,6 +1306,12 @@ packages:
       - supports-color
     dev: true
 
+  /eslint-plugin-import-typescript@0.0.4:
+    resolution: {integrity: sha512-m24hA3BnQV2unDScqjvgfwA/O+YxQG6v93pWjYF9t4GBsRNvk/lCp+1P+K3Zrme4ehiXWjgBYxUN7IZM5d+j0g==}
+    dependencies:
+      jsonc-parser: 3.2.0
+    dev: true
+
   /eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.15.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0):
     resolution: {integrity: sha512-BbPC0cuExzhiMo4Ff1BTVwHpjjv28C5R+btTOGaCRC7UEz801up0JadwkeSk5Ued6TG34uaczuVuH6qyy5YUxw==}
     engines: {node: '>=4'}
@@ -2022,6 +2031,10 @@ packages:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
     hasBin: true
+
+  /jsonc-parser@3.2.0:
+    resolution: {integrity: sha512-gfFQZrcTc8CnKXp6Y4/CBT3fTc0OVuDofpre4aEeEpSBPV5X5v4+Vmx+8snU7RLPrNHPKSgLxGo9YuQzz20o+w==}
+    dev: true
 
   /jsx-ast-utils@3.3.5:
     resolution: {integrity: sha512-ZZow9HBI5O6EPgSJLUb8n2NKgmVWTwCvHGwFuJlMjvLFqlGG6pjirPhtdsseaLZjSibD8eegzmYpUZwoIlj2cQ==}
