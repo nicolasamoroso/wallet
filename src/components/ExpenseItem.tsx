@@ -1,7 +1,7 @@
-import Expense from "@/types/expenseTypes";
+import Expense from "@/types/expenseTypes"
 
 const ExpenseItem = ({ expense }: { expense: Expense }) => {
-  const { emoji, name, product, amount, open, details } = expense;
+  const { emoji, name, product, amount, open, details } = expense
   return (
     <details
       name={name}
@@ -51,7 +51,7 @@ const ExpenseItem = ({ expense }: { expense: Expense }) => {
         </div>
       </div>
     </details>
-  );
-};
+  )
+}
 
-export default ExpenseItem;
+export default ExpenseItem
