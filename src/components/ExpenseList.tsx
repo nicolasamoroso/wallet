@@ -1,5 +1,5 @@
-import Expense from "@/types/expenseTypes";
-import ExpenseItem from "./ExpenseItem";
+import Expense from "@/types/expenseTypes"
+import ExpenseItem from "./ExpenseItem"
 
 // const expenseData = [
 //   {
@@ -45,7 +45,7 @@ const ExpenseList = ({ expenseData }: { expenseData: Expense[] }) => {
         <ExpenseItem key={index} expense={expense} />
       ))}
     </span>
-  );
-};
+  )
+}
 
-export default ExpenseList;
+export default ExpenseList
