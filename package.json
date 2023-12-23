@@ -1,29 +1,38 @@
 {
   "name": "wallet",
-  "version": "0.1.0",
-  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
+    "format": "prettier --check \"**/*.{css,js,json,jsx,ts,tsx}\" --cache",
+    "format:fix": "prettier --write \"**/*.{css,js,json,jsx,ts,tsx}\" --cache",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@radix-ui/react-icons": "^1.3.0",
+    "@radix-ui/react-separator": "^1.0.3",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "lucide-react": "^0.300.0",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "tailwind-merge": "^2.2.0"
+    "tailwind-merge": "^2.2.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "eslint-plugin-import-typescript": "^0.0.4",
     "postcss": "^8",
+    "prettier": "^3.1.1",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }
