@@ -25,3 +25,17 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+html {
+  box-sizing: border-box;
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+}
+
+details summary:hover .summary-chevron-up svg {
+  opacity: 1;
+}
+
+details .summary-chevron-up svg {
+  opacity: 0.5;
+}
