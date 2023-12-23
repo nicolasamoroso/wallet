@@ -4,7 +4,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
+    "format": "prettier --check \"**/*.{css,js,json,jsx,ts,tsx}\" --cache",
+    "format:fix": "prettier --write \"**/*.{css,js,json,jsx,ts,tsx}\" --cache",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@radix-ui/react-icons": "^1.3.0",
