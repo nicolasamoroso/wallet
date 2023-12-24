@@ -5,6 +5,7 @@ interface Expense {
   amount: number
   open: boolean
   details: string
+  id: number
 }
 
 export default Expense
