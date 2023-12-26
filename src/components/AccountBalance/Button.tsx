@@ -1,4 +1,4 @@
-export const BtnNombre = () => {
+export const Button = () => {
   return (
     <>
       <div className="w-full md:w-auto">
@@ -7,5 +7,5 @@ export const BtnNombre = () => {
         </button>
       </div>
     </>
-  );
-};
+  )
+}
