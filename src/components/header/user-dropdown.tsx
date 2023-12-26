@@ -16,7 +16,7 @@ interface Props {
 export default function UserDropdown({ image, name }: Props) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex gap-2 items-center rounded-md border p-2">
+      <DropdownMenuTrigger className="flex gap-2 items-center rounded-md border p-2 select-none">
         <Image
           src={image}
           alt="User profile picture"
@@ -29,7 +29,7 @@ export default function UserDropdown({ image, name }: Props) {
         <ChevronDownIcon className="h-4 w-4" />
       </DropdownMenuTrigger>
       <DropdownMenuContent collisionPadding={8} className="w-48">
-        <DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer">
           <LogOutIcon className="h-4 w-4 mr-2" /> Log Out
         </DropdownMenuItem>
       </DropdownMenuContent>
