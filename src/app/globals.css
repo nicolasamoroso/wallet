@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 210 38% 95%;
     --foreground: 0 0% 3.9%;
 
     --card: 0 0% 100%;
@@ -63,22 +63,5 @@
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
-  }
-}
-
-details summary:hover .summary-chevron-up svg {
-  opacity: 1;
-}
-
-details .summary-chevron-up svg {
-  opacity: 0.5;
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }
