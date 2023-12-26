@@ -1,4 +1,4 @@
-import { Separator } from "../ui/separator"
+import { Separator } from "@/components/ui/separator"
 import { ItemNombre, ItemNombreProps } from "./Items"
 
 const ITEMS: ItemNombreProps[] = [
