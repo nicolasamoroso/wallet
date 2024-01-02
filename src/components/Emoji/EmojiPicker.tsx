@@ -34,7 +34,7 @@ const EmojiPicker = ({ emojis }: { emojis: Emoji[] }) => {
   return (
     <HoverCard>
       <HoverCardTrigger className="cursor-pointer">Hover</HoverCardTrigger>
-      <HoverCardContent className="overflow-auto h-[240px]">
+      <HoverCardContent className="overflow-auto h-[245px]">
         <ReactSortable
           list={state}
           setList={setState}
