@@ -1,5 +1,8 @@
+import Emoji from "@/types/emojisTypes"
 import Expense from "@/types/expenseTypes"
-import ExpenseList from "@/components/ExpenseList"
+// import { Container } from "@/components/AccountBalance/Container"
+import EmojiPicker from "@/components/Emoji/EmojiPicker"
+import ExpenseList from "@/components/Expense/ExpenseList"
 
 export default function Home() {
   const expenseData = [
@@ -37,9 +40,27 @@ export default function Home() {
     },
   ] as Expense[]
 
+  const emojis = [
+    { id: 1, emoji: "🍕" },
+    { id: 2, emoji: "🍔" },
+    { id: 3, emoji: "🌭" },
+    { id: 4, emoji: "🍟" },
+    { id: 5, emoji: "🍿" },
+    { id: 6, emoji: "🥓" },
+    { id: 7, emoji: "🧇" },
+    { id: 8, emoji: "🥞" },
+    { id: 9, emoji: "🍞" },
+    { id: 10, emoji: "🥐" },
+    { id: 11, emoji: "🥨" },
+  ] as Emoji[]
+
   return (
     <div className="flex justify-center h-screen items-center">
-      <ExpenseList expenseData={expenseData} />
+      <div>
+        {/* <Container /> */}
+        <ExpenseList expenseData={expenseData} />
+        <EmojiPicker emojis={emojis} />
+      </div>
     </div>
   )
 }
