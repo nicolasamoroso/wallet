@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ReactSortable } from "react-sortablejs"
 
 import Emoji from "@/types/emojisTypes"
@@ -10,8 +10,14 @@ import EmojiItem from "./EmojiItem"
 const EMOJIS_STORAGE_KEY: string = "emojis"
 
 const EmojiPicker = ({ emojis }: { emojis: Emoji[] }) => {
-  const emojisFromStorage = JSON.parse(localStorage.getItem(EMOJIS_STORAGE_KEY) || "null")
-  const [state, setState] = useState<Emoji[]>(emojisFromStorage || emojis)
+  const [state, setState] = useState<Emoji[]>([])
+
+  useEffect(() => {
+    const emojisFromStorage = JSON.parse(
+      localStorage.getItem(EMOJIS_STORAGE_KEY) || "null"
+    )
+    setState(emojisFromStorage || emojis)
+  }, [emojis])
 
   function updateEmojis(ev: any) {
     const { oldIndex, newIndex } = ev
@@ -28,7 +34,7 @@ const EmojiPicker = ({ emojis }: { emojis: Emoji[] }) => {
   return (
     <HoverCard>
       <HoverCardTrigger className="cursor-pointer">Hover</HoverCardTrigger>
-      <HoverCardContent className="overflow-auto h-[250px]">
+      <HoverCardContent className="overflow-auto h-[240px]">
         <ReactSortable
           list={state}
           setList={setState}
