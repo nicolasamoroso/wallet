@@ -17,7 +17,7 @@ const EmojiPicker = () => {
     <>
       <Popover>
         <PopoverTrigger>Open</PopoverTrigger>
-        <PopoverContent className="md:max-w-[350px] sm:w-[280px] max-h-[450px]  p-0 rounded-xl">
+        <PopoverContent className="sm:w-[280px] md:w-[350px] lg:w-[500px] max-h-[450px]  p-0 rounded-xl">
           <Picker
             theme={color}
             onEmojiClick={onEmojiClick}
