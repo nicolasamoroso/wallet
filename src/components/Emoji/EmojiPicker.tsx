@@ -15,7 +15,9 @@ const EmojiPicker = () => {
   let preview = { showPreview: false }
   return (
     <>
-      <button onClick={() => setOpen((prev) => !prev)}>abrir</button>
+      <button onClick={() => setOpen((prev) => !prev)} className="bg-black text-white">
+        abrir
+      </button>
       {open && (
         <Picker
           theme={color}
