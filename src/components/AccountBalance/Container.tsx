@@ -1,13 +1,8 @@
-import { Button } from "./Button"
+import AccountBalance from "@/types/accountBalanceTypes"
 import { ItemDisplay } from "./ItemDisplay"
 
-export const Nombre: React.FC = () => {
-  return (
-    <>
-      <div className="w-[90%] md:w-auto flex flex-col items-center gap-20 bg-slate-100">
-        <ItemDisplay />
-        <Button />
-      </div>
-    </>
-  )
+const Container = ({ items }: { items: AccountBalance[] }) => {
+  return <ItemDisplay items={items} />
 }
+
+export default Container
