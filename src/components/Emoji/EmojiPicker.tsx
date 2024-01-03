@@ -1,52 +1,35 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { ReactSortable } from "react-sortablejs"
+import { useState } from "react"
+import Picker, { EmojiClickData, SuggestionMode, Theme } from "emoji-picker-react"
 
-import Emoji from "@/types/emojisTypes"
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
-import EmojiItem from "./EmojiItem"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
-const EMOJIS_STORAGE_KEY: string = "emojis"
-
-const EmojiPicker = ({ emojis }: { emojis: Emoji[] }) => {
-  const [state, setState] = useState<Emoji[]>([])
-
-  useEffect(() => {
-    const emojisFromStorage = JSON.parse(
-      localStorage.getItem(EMOJIS_STORAGE_KEY) || "null"
-    )
-    setState(emojisFromStorage || emojis)
-  }, [emojis])
-
-  function updateEmojis(ev: any) {
-    const { oldIndex, newIndex } = ev
-    const items = [...state]
-    const itemToMove = items[oldIndex]
-    const itemToReplace = items[newIndex]
-
-    items[oldIndex] = itemToReplace
-    items[newIndex] = itemToMove
-
-    localStorage.setItem(EMOJIS_STORAGE_KEY, JSON.stringify(items))
+const EmojiPicker = () => {
+  const onEmojiClick = (emojiData: EmojiClickData) => {
+    console.log(emojiData)
   }
 
+  let color = Theme.LIGHT
+  let suggested = SuggestionMode.RECENT
+  let preview = { showPreview: false }
   return (
-    <HoverCard>
-      <HoverCardTrigger className="cursor-pointer">Hover</HoverCardTrigger>
-      <HoverCardContent className="overflow-auto h-[245px]">
-        <ReactSortable
-          list={state}
-          setList={setState}
-          onUpdate={(ev) => updateEmojis(ev)}
-          className="grid grid-cols-3 grid-rows-3 gap-2"
-        >
-          {state.map((item) => (
-            <EmojiItem key={item.id} emoji={item.emoji} />
-          ))}
-        </ReactSortable>
-      </HoverCardContent>
-    </HoverCard>
+    <>
+      <Popover>
+        <PopoverTrigger>Open</PopoverTrigger>
+        <PopoverContent className="md:max-w-[350px] sm:w-[280px] max-h-[450px]  p-0 rounded-xl">
+          <Picker
+            theme={color}
+            onEmojiClick={onEmojiClick}
+            autoFocusSearch={false}
+            previewConfig={preview}
+            suggestedEmojisMode={suggested}
+            className="select-none"
+            width={"100%"}
+          />
+        </PopoverContent>
+      </Popover>
+    </>
   )
 }
 
