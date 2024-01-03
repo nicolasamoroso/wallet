@@ -1,7 +1,14 @@
 {
-  "extends": "next/core-web-vitals",
-  "plugins": ["eslint-plugin-import-typescript"],
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:storybook/recommended"
+  ],
+  "plugins": [
+    "eslint-plugin-import-typescript"
+  ],
   "rules": {
-    "import-typescript/no-relative-parent-imports": ["error"]
+    "import-typescript/no-relative-parent-imports": [
+      "error"
+    ]
   }
 }
