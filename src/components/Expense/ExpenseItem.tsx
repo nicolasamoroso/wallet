@@ -21,7 +21,7 @@ const ExpenseItem = ({ expense }: { expense: Expense }) => {
           <p>${amount}</p>
         </div>
       </AccordionTrigger>
-      <AccordionContent className="border-t border-border p-4 font-[--muted-foreground]">
+      <AccordionContent className="border-t border-border p-4">
         <p>{details}</p>
       </AccordionContent>
     </AccordionItem>
