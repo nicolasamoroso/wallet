@@ -30,8 +30,8 @@ dependencies:
     specifier: ^2.0.0
     version: 2.0.0
   emoji-picker-react:
-    specifier: ^4.6.0
-    version: 4.6.0(react@18.2.0)
+    specifier: ^4.6.2
+    version: 4.6.2(react@18.2.0)
   lucide-react:
     specifier: ^0.300.0
     version: 0.300.0(react@18.2.0)
@@ -6123,12 +6123,13 @@ packages:
       minimalistic-crypto-utils: 1.0.1
     dev: true
 
-  /emoji-picker-react@4.6.0(react@18.2.0):
-    resolution: {integrity: sha512-HKrKVt9B3FBd2vecIVJcMo7ubA03MfqrfeKjXVKkrncf0nSuWlNyXT9hVt07bxdjr4t2tkqVz/BMVYi34ajl4A==}
+  /emoji-picker-react@4.6.2(react@18.2.0):
+    resolution: {integrity: sha512-NZCIIMt1kjAkfNTB390wkKYPWw3OE1uRN3mG5O3hQ39GRBIZe8xP48FqtP0BKKUflkP3dl19ziuRVHlSwioF+Q==}
     engines: {node: '>=10'}
     peerDependencies:
       react: '>=16'
     dependencies:
+      flairup: 0.0.7
       react: 18.2.0
     dev: false
 
@@ -6953,6 +6954,10 @@ packages:
       locate-path: 7.2.0
       path-exists: 5.0.0
     dev: true
+
+  /flairup@0.0.7:
+    resolution: {integrity: sha512-je8vHVwuPWWGyL70McoeMzYK/KCtaFKEF7idTA9RtqwYjK+v1uhz4taIDqjDv19RJ48bPpk1J40bBFRKdS8yeg==}
+    dev: false
 
   /flat-cache@3.2.0:
     resolution: {integrity: sha512-CYcENa+FtcUKLmhhqyctpclsq7QF38pKjZHsGNiSQF5r4FtoKDWabFDl3hzaEQMvT1LHEysw5twgLvpYYb4vbw==}
