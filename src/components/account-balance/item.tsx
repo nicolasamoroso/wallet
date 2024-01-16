@@ -1,4 +1,4 @@
-import AccountBalance from "@/types/accountBalanceTypes"
+import AccountBalance from "@/types/account-balance-types"
 
 const colors = {
   red: "text-red-500",

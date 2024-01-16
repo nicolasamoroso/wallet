@@ -1,5 +1,5 @@
-import AccountBalance from "@/types/accountBalanceTypes"
-import { ItemDisplay } from "./ItemDisplay"
+import AccountBalance from "@/types/account-balance-types"
+import { ItemDisplay } from "./item-display"
 
 const Container = ({ items }: { items: AccountBalance[] }) => {
   return <ItemDisplay items={items} />

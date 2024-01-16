@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 
-import Expense from "@/types/expenseTypes"
-import ExpenseList from "@/components/Expense/ExpenseList"
+import Expense from "@/types/expense-types"
+import ExpenseList from "./expense-list"
 
 const expenseData = [
   {

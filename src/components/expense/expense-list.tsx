@@ -1,6 +1,6 @@
-import Expense from "@/types/expenseTypes"
+import Expense from "@/types/expense-types"
 import { Accordion } from "@/components/ui/accordion"
-import ExpenseItem from "./ExpenseItem"
+import ExpenseItem from "./expense-item"
 
 const ExpenseList = ({ expenseData }: { expenseData: Expense[] }) => {
   return (

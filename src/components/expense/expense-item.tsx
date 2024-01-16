@@ -1,4 +1,4 @@
-import Expense from "@/types/expenseTypes"
+import Expense from "@/types/expense-types"
 import {
   AccordionContent,
   AccordionItem,
