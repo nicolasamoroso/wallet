@@ -65,19 +65,18 @@ export function PaymentTable<TData, TValue>({
           onChange={(event) =>
             table.getColumn("category")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="max-w-sm bg-primary-foreground"
         />
       </div>
-      <Menu table={table} />
-
+      {/* <Menu table={table} /> */}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="bg-[#efefef]">
+              <TableRow key={headerGroup.id} className="bg-secondary">
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="text-center">
+                    <TableHead key={header.id} className="text-center text-primary">
                       {header.isPlaceholder
                         ? null
                         : flexRender(header.column.columnDef.header, header.getContext())}
@@ -92,7 +91,10 @@ export function PaymentTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id}>
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="text-center">
+                    <TableCell
+                      key={cell.id}
+                      className="text-center bg-primary-foreground"
+                    >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
@@ -115,6 +117,7 @@ export function PaymentTable<TData, TValue>({
           size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
+          className="bg-primary-foreground"
         >
           Previous
         </Button>
@@ -123,6 +126,7 @@ export function PaymentTable<TData, TValue>({
           size="sm"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
+          className="bg-primary-foreground"
         >
           Next
         </Button>

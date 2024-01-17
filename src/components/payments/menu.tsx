@@ -10,7 +10,7 @@ const Menu = ({ table }: { table: any }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="m-2">
-        <Button variant="outline" className="ml-auto">
+        <Button variant="outline" className="ml-auto bg-primary-foreground">
           Columns
         </Button>
       </DropdownMenuTrigger>

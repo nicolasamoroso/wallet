@@ -16,7 +16,7 @@ interface Props {
 export default function UserDropdown({ image, name }: Props) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex gap-2 items-center rounded-md border p-2 select-none">
+      <DropdownMenuTrigger className="flex gap-2 items-center rounded-md border p-2 select-none bg-primary-foreground text-primary">
         <Image
           src={image}
           alt="User profile picture"
