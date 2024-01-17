@@ -29,6 +29,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-sortablejs": "^6.1.4",
+    "recharts": "^2.10.4",
     "sortablejs": "^1.15.1",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7"
