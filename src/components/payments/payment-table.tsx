@@ -57,7 +57,7 @@ export function PaymentTable<TData, TValue>({
   })
 
   return (
-    <div>
+    <div className="max-w-[590px] lg:max-w-[1080px] mx-auto">
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter categories..."
@@ -69,14 +69,17 @@ export function PaymentTable<TData, TValue>({
         />
       </div>
       {/* <Menu table={table} /> */}
-      <div className="rounded-md border">
+      <div className="rounded-t-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className="bg-secondary">
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="text-center text-primary">
+                    <TableHead
+                      key={header.id}
+                      className="text-center text-primary rounded-md"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(header.column.columnDef.header, header.getContext())}

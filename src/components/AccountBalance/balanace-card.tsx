@@ -28,7 +28,7 @@ const BalanaceCard = ({
   }
 
   return (
-    <Card className="w-[350px] h-[133px]">
+    <Card className="min-w-[289px] max-w-[350px] h-[133px] mx-auto lg:w-[325px] xl:w-[350px]">
       <CardHeader className="flex-row items-center justify-between pb-4">
         <CardTitle className="font-normal text-lg">{title}</CardTitle>
         <CardDescription className="text-xs">

@@ -40,7 +40,7 @@ const Dashboard = () => {
   ]
 
   return (
-    <div className="md:max-w-[712px] lg:max-w-[1080px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+    <div className="max-w-[590px] lg:max-w-[1080px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mx-auto">
       <BalanaceCard
         title="Presupuesto"
         description="vs el mes pasado"
