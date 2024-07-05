@@ -8,7 +8,6 @@ import CalculateCurrentSpents from "@/hooks/calculate-current-spents"
 import CanHaveChart from "@/hooks/can-have-chart"
 import getMonthlyTotals from "@/hooks/get-monthly-totals"
 import { Budget_CurrentBalance_Spent } from "@/app/page"
-import { setBudget, setSpent } from "@/api/account.actions"
 import BalanaceCard from "./balanace-card"
 
 const Dashboard = ({
@@ -57,16 +56,16 @@ const Dashboard = ({
       data: currentBalance,
     })
 
-  const addBudget = async (amount: number) => {
-    const response = await setBudget({
-      accountId: accountId,
-      budgetAmount: amount,
-    })
+  // const addBudget = async (amount: number) => {
+  //   const response = await setBudget({
+  //     accountId: accountId,
+  //     budgetAmount: amount,
+  //   })
 
-    if (response) {
-      setBudgets(() => amount)
-    }
-  }
+  //   if (response) {
+  //     setBudgets(() => amount)
+  //   }
+  // }
 
   return (
     <div className="grid grid-cols-3 gap-3">

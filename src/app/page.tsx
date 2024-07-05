@@ -2,8 +2,6 @@ import { Payment } from "@/types/paymentType"
 import Dashboard from "@/components/AccountBalance/dashboard"
 import { columns } from "@/components/payments/columns"
 import { PaymentTable } from "@/components/payments/payment-table"
-import { getAccount } from "@/api/account.actions"
-import { getUser } from "@/api/user.actions"
 
 export type Budget_CurrentBalance_Spent = {
   id: string
