@@ -52,6 +52,9 @@ export function PaymentTable<TData, TValue>({
       month: new Date().getMonth(),
       year: new Date().getFullYear(),
     }) as TData[]
+
+    console.log(monthlyPayments)
+    console.log(new Date().getMonth())
     setPayments(monthlyPayments)
     setIsLoading(false)
   }, [data])

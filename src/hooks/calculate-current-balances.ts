@@ -9,12 +9,10 @@ const CalculateCurrentBalances = ({
   spents: Budget_CurrentBalance_Spent[]
   accountId: string
 }) => {
-  // Crear un mapa para almacenar los gastos por mes y año
   const spentMap = new Map()
   spents.forEach((spent) => {
     const key = `${spent.date.getMonth()}-${spent.date.getFullYear()}`
     if (spentMap.has(key)) {
-      // Si ya hay un gasto para este mes y año, sumarlo
       spentMap.set(key, spentMap.get(key) + spent.amount)
     } else {
       spentMap.set(key, spent.amount)

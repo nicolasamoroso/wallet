@@ -69,7 +69,7 @@ const Dashboard = ({
 
   return (
     <div className="mb-10">
-      <h1 className="text-3xl font-bold">Dashboard</h1>
+      <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
       {/* <DatePickerWithRange className="col-span-3 sm:col-span-1" /> */}
       <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 col-span-3">
         <BalanaceCard
