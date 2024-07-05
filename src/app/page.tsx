@@ -19,7 +19,7 @@ export default async function Home() {
       category: "Food",
       name: "Pizza",
       description: "Best Pizza in Town",
-      date: new Date(2023, 6, 1),
+      date: new Date(2023, 6, 1, 12),
     },
     {
       id: "728ed52g",
@@ -28,7 +28,7 @@ export default async function Home() {
       category: "Food",
       name: "Burger",
       description: "Best Burger in Town",
-      date: new Date(2023, 6, 5),
+      date: new Date(2023, 6, 5, 12),
     },
     {
       id: "728ed52h",
@@ -37,7 +37,7 @@ export default async function Home() {
       category: "Food",
       name: "Fries",
       description: "Best Fries in Town",
-      date: new Date(2023, 6, 10),
+      date: new Date(2023, 6, 10, 12),
     },
     {
       id: "728ed52i",
@@ -46,7 +46,7 @@ export default async function Home() {
       category: "Utilities",
       name: "Water",
       description: "OSE",
-      date: new Date(2023, 6, 15),
+      date: new Date(2023, 6, 15, 12),
     },
     {
       id: "728ed52j",
@@ -55,7 +55,7 @@ export default async function Home() {
       category: "Food",
       name: "Ice Cream",
       description: "Best Ice Cream in Town",
-      date: new Date(2023, 6, 20),
+      date: new Date(2023, 6, 20, 12),
     },
     {
       id: "728ed52k",
@@ -64,7 +64,7 @@ export default async function Home() {
       category: "Food",
       name: "Soda",
       description: "Best Soda in Town",
-      date: new Date(2023, 6, 25),
+      date: new Date(2023, 6, 25, 12),
     },
     {
       id: "728ed52l",
@@ -73,7 +73,7 @@ export default async function Home() {
       category: "Food",
       name: "Chicken",
       description: "Best Chicken in Town",
-      date: new Date(2023, 7, 1),
+      date: new Date(2023, 7, 1, 12),
     },
     {
       id: "728ed52m",
@@ -82,7 +82,7 @@ export default async function Home() {
       category: "Food",
       name: "Cocktail",
       description: "Best Cocktail in Town",
-      date: new Date(2023, 7, 5),
+      date: new Date(2023, 7, 5, 12),
     },
     {
       id: "728ed52n",
@@ -91,7 +91,7 @@ export default async function Home() {
       category: "Food",
       name: "Pasta",
       description: "Best Pasta in Town",
-      date: new Date(2023, 7, 10),
+      date: new Date(2023, 7, 10, 12),
     },
     {
       id: "728ed52o",
@@ -100,7 +100,7 @@ export default async function Home() {
       category: "Utilities",
       name: "Electricity",
       description: "UTE",
-      date: new Date(2023, 7, 15),
+      date: new Date(2023, 7, 15, 12),
     },
     {
       id: "728ed52p",
@@ -109,7 +109,7 @@ export default async function Home() {
       category: "Utilities",
       name: "Phone Bill",
       description: "ANTEL",
-      date: new Date(2023, 7, 20),
+      date: new Date(2023, 7, 20, 12),
     },
     {
       id: "728ed52q",
@@ -118,7 +118,7 @@ export default async function Home() {
       category: "Entertainment",
       name: "TV Subscription",
       description: "DirectTV",
-      date: new Date(2023, 7, 25),
+      date: new Date(2023, 7, 25, 12),
     },
     {
       id: "728ed52r",
@@ -127,7 +127,7 @@ export default async function Home() {
       category: "Education",
       name: "Books",
       description: "Best Books in Town",
-      date: new Date(2023, 8, 1),
+      date: new Date(2023, 8, 1, 12),
     },
     {
       id: "728ed52s",
@@ -136,7 +136,7 @@ export default async function Home() {
       category: "Travel",
       name: "Flight Ticket",
       description: "Trip to Miami",
-      date: new Date(2023, 8, 5),
+      date: new Date(2023, 8, 5, 12),
     },
     {
       id: "728ed52t",
@@ -145,7 +145,7 @@ export default async function Home() {
       category: "Food",
       name: "Cake",
       description: "Best Cake in Town",
-      date: new Date(2023, 8, 10),
+      date: new Date(2023, 8, 10, 12),
     },
     {
       id: "728ed52u",
@@ -154,7 +154,7 @@ export default async function Home() {
       category: "Food",
       name: "Steak",
       description: "Best Steak in Town",
-      date: new Date(2023, 8, 15),
+      date: new Date(2023, 8, 15, 12),
     },
     {
       id: "728ed52v",
@@ -163,7 +163,7 @@ export default async function Home() {
       category: "Food",
       name: "Tea",
       description: "Best Tea in Town",
-      date: new Date(2023, 8, 20),
+      date: new Date(2023, 8, 20, 12),
     },
     {
       id: "728ed52w",
@@ -172,7 +172,7 @@ export default async function Home() {
       category: "Food",
       name: "Sushi",
       description: "Best Sushi in Town",
-      date: new Date(2023, 8, 25),
+      date: new Date(2023, 8, 25, 12),
     },
     {
       id: "728ed52x",
@@ -181,7 +181,7 @@ export default async function Home() {
       category: "Food",
       name: "Wine",
       description: "Best Wine in Town",
-      date: new Date(2023, 9, 1),
+      date: new Date(2023, 9, 1, 12),
     },
     {
       id: "728ed52y",
@@ -190,7 +190,7 @@ export default async function Home() {
       category: "Utilities",
       name: "Internet Bill",
       description: "ANTEL",
-      date: new Date(2023, 9, 5),
+      date: new Date(2023, 9, 5, 12),
     },
     {
       id: "728ed52z",
@@ -199,7 +199,7 @@ export default async function Home() {
       category: "Utilities",
       name: "Power Adapter",
       description: "Best Power Adapter in Town",
-      date: new Date(2023, 9, 10),
+      date: new Date(2023, 9, 10, 12),
     },
     {
       id: "728ed530",
@@ -208,7 +208,7 @@ export default async function Home() {
       category: "Entertainment",
       name: "Video Game",
       description: "Best Video Game in Town",
-      date: new Date(2023, 9, 15),
+      date: new Date(2023, 9, 15, 12),
     },
     {
       id: "728ed531",
@@ -217,7 +217,7 @@ export default async function Home() {
       category: "Entertainment",
       name: "Movie Ticket",
       description: "Best Movie Ticket in Town",
-      date: new Date(2023, 9, 20),
+      date: new Date(2023, 9, 20, 12),
     },
     {
       id: "728ed532",
@@ -226,7 +226,7 @@ export default async function Home() {
       category: "Education",
       name: "Notebooks",
       description: "Best Notebooks in Town",
-      date: new Date(2023, 9, 25),
+      date: new Date(2023, 9, 25, 12),
     },
     {
       id: "728ed533",
@@ -235,7 +235,7 @@ export default async function Home() {
       category: "Food",
       name: "Salad",
       description: "Best Salad in Town",
-      date: new Date(2024, 0, 5),
+      date: new Date(2024, 0, 5, 12),
     },
     {
       id: "728ed534",
@@ -244,7 +244,7 @@ export default async function Home() {
       category: "Food",
       name: "Pizza",
       description: "Best Pizza in Town",
-      date: new Date(2024, 0, 10),
+      date: new Date(2024, 0, 10, 12),
     },
     {
       id: "728ed535",
@@ -253,7 +253,7 @@ export default async function Home() {
       category: "Food",
       name: "Burger",
       description: "Best Burger in Town",
-      date: new Date(2024, 1, 2),
+      date: new Date(2024, 1, 2, 12),
     },
     {
       id: "728ed536",
@@ -262,7 +262,7 @@ export default async function Home() {
       category: "Food",
       name: "Fries",
       description: "Best Fries in Town",
-      date: new Date(2024, 1, 15),
+      date: new Date(2024, 1, 15, 12),
     },
     {
       id: "728ed537",
@@ -271,7 +271,7 @@ export default async function Home() {
       category: "Utilities",
       name: "Water",
       description: "OSE",
-      date: new Date(2024, 2, 1),
+      date: new Date(2024, 2, 1, 12),
     },
     {
       id: "728ed538",
@@ -280,7 +280,7 @@ export default async function Home() {
       category: "Food",
       name: "Ice Cream",
       description: "Best Ice Cream in Town",
-      date: new Date(2024, 2, 10),
+      date: new Date(2024, 2, 10, 12),
     },
     {
       id: "728ed539",
@@ -289,7 +289,7 @@ export default async function Home() {
       category: "Food",
       name: "Soda",
       description: "Best Soda in Town",
-      date: new Date(2024, 3, 5),
+      date: new Date(2024, 3, 5, 12),
     },
     {
       id: "728ed53a",
@@ -298,7 +298,7 @@ export default async function Home() {
       category: "Food",
       name: "Chicken",
       description: "Best Chicken in Town",
-      date: new Date(2024, 3, 20),
+      date: new Date(2024, 3, 20, 12),
     },
     {
       id: "728ed53b",
@@ -307,7 +307,7 @@ export default async function Home() {
       category: "Food",
       name: "Cocktail",
       description: "Best Cocktail in Town",
-      date: new Date(2024, 4, 5),
+      date: new Date(2024, 4, 5, 12),
     },
     {
       id: "728ed53c",
@@ -316,7 +316,7 @@ export default async function Home() {
       category: "Food",
       name: "Pasta",
       description: "Best Pasta in Town",
-      date: new Date(2024, 5, 20),
+      date: new Date(2024, 5, 20, 12),
     },
     {
       id: "728ed53d",
@@ -325,7 +325,7 @@ export default async function Home() {
       category: "Utilities",
       name: "Electricity",
       description: "UTE",
-      date: new Date(2024, 5, 1),
+      date: new Date(2024, 5, 1, 12),
     },
     {
       id: "728ed53e",
@@ -334,7 +334,7 @@ export default async function Home() {
       category: "Utilities",
       name: "Phone Bill",
       description: "ANTEL",
-      date: new Date(2024, 5, 15),
+      date: new Date(2024, 5, 15, 12),
     },
     {
       id: "728ed53f",
@@ -343,7 +343,7 @@ export default async function Home() {
       category: "Entertainment",
       name: "TV Subscription",
       description: "DirectTV",
-      date: new Date(2024, 5, 1),
+      date: new Date(2024, 5, 1, 12),
     },
     {
       id: "728ed53g",
@@ -352,7 +352,7 @@ export default async function Home() {
       category: "Education",
       name: "Books",
       description: "Best Books in Town",
-      date: new Date(2024, 5, 15),
+      date: new Date(2024, 5, 15, 12),
     },
     {
       id: "728ed53h",
@@ -361,7 +361,7 @@ export default async function Home() {
       category: "Travel",
       name: "Flight Ticket",
       description: "Trip to Miami",
-      date: new Date(2024, 5, 1),
+      date: new Date(2024, 5, 1, 12),
     },
     {
       id: "728ed53i",
@@ -370,7 +370,7 @@ export default async function Home() {
       category: "Food",
       name: "Cake",
       description: "Best Cake in Town",
-      date: new Date(2024, 6, 10),
+      date: new Date(2024, 6, 10, 12),
     },
     {
       id: "628ed53j",
@@ -379,7 +379,7 @@ export default async function Home() {
       category: "Food",
       name: "Steak",
       description: "Best Steak in Town",
-      date: new Date(2024, 6, 5),
+      date: new Date(2024, 6, 5, 12),
     },
     {
       id: "628ed53k",
@@ -388,7 +388,7 @@ export default async function Home() {
       category: "Food",
       name: "Tea",
       description: "Best Tea in Town",
-      date: new Date(2024, 6, 20),
+      date: new Date(2024, 6, 20, 12),
     },
     {
       id: "628ed53l",
@@ -397,7 +397,7 @@ export default async function Home() {
       category: "Food",
       name: "Sushi",
       description: "Best Sushi in Town",
-      date: new Date(2024, 6, 5),
+      date: new Date(2024, 6, 5, 12),
     },
     {
       id: "628ed53m",
@@ -406,7 +406,7 @@ export default async function Home() {
       category: "Food",
       name: "Wine",
       description: "Best Wine in Town",
-      date: new Date(2024, 6, 20),
+      date: new Date(2024, 6, 20, 12),
     },
     {
       id: "628ed53n",
@@ -415,7 +415,7 @@ export default async function Home() {
       category: "Utilities",
       name: "Internet Bill",
       description: "ANTEL",
-      date: new Date(2024, 6, 1),
+      date: new Date(2024, 6, 1, 12, 12),
     },
     {
       id: "628ed53o",
@@ -424,7 +424,7 @@ export default async function Home() {
       category: "Utilities",
       name: "Power Adapter",
       description: "Best Power Adapter in Town",
-      date: new Date(2024, 6, 15),
+      date: new Date(2024, 6, 15, 12),
     },
     {
       id: "628ed53p",
@@ -433,7 +433,7 @@ export default async function Home() {
       category: "Entertainment",
       name: "Video Game",
       description: "Best Video Game in Town",
-      date: new Date(2024, 6, 1),
+      date: new Date(2024, 6, 1, 12),
     },
     {
       id: "628ed53q",
@@ -442,7 +442,7 @@ export default async function Home() {
       category: "Entertainment",
       name: "Movie Ticket",
       description: "Best Movie Ticket in Town",
-      date: new Date(2024, 6, 15),
+      date: new Date(2024, 6, 15, 12),
     },
     {
       id: "628ed53r",
@@ -451,7 +451,7 @@ export default async function Home() {
       category: "Education",
       name: "Notebooks",
       description: "Best Notebooks in Town",
-      date: new Date(2024, 6, 30),
+      date: new Date(2024, 6, 30, 12),
     },
     {
       id: "628ed53s",
@@ -460,7 +460,7 @@ export default async function Home() {
       category: "Entertainment",
       name: "Movie Ticket",
       description: "Best Movie Ticket in Town",
-      date: new Date(2024, 6, 30),
+      date: new Date(2024, 6, 30, 12),
     },
   ] as Payment[]
 
