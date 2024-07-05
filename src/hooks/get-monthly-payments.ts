@@ -13,7 +13,7 @@ const getMonthlyPayments = ({
     const itemMonth = new Date(item.date).getMonth()
     const itemYear = new Date(item.date).getFullYear()
 
-    console.log(acc, itemMonth, itemYear, month, year)
+    console.log(item, itemMonth, itemYear, month, year)
 
     if (itemMonth === month && itemYear === year) {
       acc.push({
