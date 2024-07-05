@@ -75,7 +75,7 @@ export function PaymentTable<TData, TValue>({
 
   return (
     <>
-      <div className="flex flex-col xs:flex-auto xs:grid xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 col-span-3 mt-10 md:mt-20">
+      <div className="flex flex-col xs:flex-auto xs:grid xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 col-span-3 pt-10 md:pt-20">
         <div className="text-end col-span-2 lg:hidden">
           <AddPayment />
         </div>

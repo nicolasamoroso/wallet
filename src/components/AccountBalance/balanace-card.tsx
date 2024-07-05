@@ -38,11 +38,11 @@ const BalanaceCard = ({
           <CardTitle className="font-bold text-md text-nowrap">{title}</CardTitle>
           <div className="flex flex-col">
             <span className="text-3xl font-bold">${amount}</span>
-            <p className="text-xs font-bold mt-1">
-              <span className={color}>{percentage} </span>
-              al mes anterior
-            </p>
           </div>
+          <p className="text-xs font-bold mt-1">
+            <span className={color}>{percentage} </span>
+            al mes anterior
+          </p>
         </div>
         {data && data.length > 1 && (
           <div className="flex flex-col items-center">
