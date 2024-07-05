@@ -1,67 +1,97 @@
+"use client"
+
+import { useState } from "react"
+
+import { Payment } from "@/types/paymentType"
+import CalculateCurrentBalances from "@/hooks/calculate-current-balances"
+import CalculateCurrentSpents from "@/hooks/calculate-current-spents"
+import CanHaveChart from "@/hooks/can-have-chart"
+import getMonthlyTotals from "@/hooks/get-monthly-totals"
+import { Budget_CurrentBalance_Spent } from "@/app/page"
+import { setBudget, setSpent } from "@/api/account.actions"
 import BalanaceCard from "./balanace-card"
 
-const Dashboard = () => {
-  const data = [
-    {
-      name: "Page A",
-      uv: 4000,
-      amt: 2400,
-    },
-    {
-      name: "Page B",
-      uv: 3000,
-      amt: 2210,
-    },
-    {
-      name: "Page C",
-      uv: 2000,
-      amt: 2290,
-    },
-    {
-      name: "Page D",
-      uv: 2780,
-      amt: 2000,
-    },
-    {
-      name: "Page E",
-      uv: 1890,
-      amt: 2181,
-    },
-    {
-      name: "Page F",
-      uv: 2390,
-      amt: 2500,
-    },
-    {
-      name: "Page G",
-      uv: 3490,
-      amt: 2100,
-    },
-  ]
+const Dashboard = ({
+  budgets,
+  payments,
+  accountId,
+}: {
+  budgets: Budget_CurrentBalance_Spent[]
+  payments: Payment[]
+  accountId: string
+}) => {
+  const spents = CalculateCurrentSpents({
+    accountId: accountId,
+    payments: payments,
+  }) as Budget_CurrentBalance_Spent[]
+
+  const BudgetsPerMonth = getMonthlyTotals(budgets) as Budget_CurrentBalance_Spent[]
+  const SpentsPerMonth = getMonthlyTotals(spents) as Budget_CurrentBalance_Spent[]
+
+  const currentBalance = CalculateCurrentBalances({
+    budgets: BudgetsPerMonth,
+    spents: SpentsPerMonth,
+    accountId: accountId,
+  }) as Budget_CurrentBalance_Spent[]
+
+  const [MonthBudget, setBudgets] = useState<number>(
+    BudgetsPerMonth[BudgetsPerMonth.length - 1].amount
+  )
+  const [MonthSpents, setSpents] = useState<number>(
+    SpentsPerMonth[SpentsPerMonth.length - 1].amount
+  )
+  const [MonthBalance, setCurrentBalance] = useState<number>(
+    currentBalance[currentBalance.length - 1].amount
+  )
+
+  const { percentage: budgetPercentage, chartData: budgetChartData } = CanHaveChart({
+    data: BudgetsPerMonth,
+  })
+
+  const { percentage: spentPercentage, chartData: spentChartData } = CanHaveChart({
+    data: SpentsPerMonth,
+  })
+
+  const { percentage: currentBalancePercentage, chartData: currentBalanceChartData } =
+    CanHaveChart({
+      data: currentBalance,
+    })
+
+  const addBudget = async (amount: number) => {
+    const response = await setBudget({
+      accountId: accountId,
+      budgetAmount: amount,
+    })
+
+    if (response) {
+      setBudgets(() => amount)
+    }
+  }
 
   return (
-    <div className="max-w-[590px] lg:max-w-[1080px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mx-auto">
-      <BalanaceCard
-        title="Presupuesto"
-        description="vs el mes pasado"
-        amount={10000.0}
-        percentage="3"
-        data={data}
-      />
-      <BalanaceCard
-        title="Gastado"
-        description="vs el mes pasado"
-        amount={7275.92}
-        percentage="-3"
-        data={data}
-      />
-      <BalanaceCard
-        title="Saldo acutal"
-        description="restante"
-        amount={2724.08}
-        percentage="3"
-        data={data}
-      />
+    <div className="grid grid-cols-3 gap-3">
+      {/* <DatePickerWithRange className="col-span-3 sm:col-span-1" /> */}
+      <h1 className="text-3xl font-bold">Dashboard</h1>
+      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 col-span-3">
+        <BalanaceCard
+          title="Presupuesto"
+          amount={MonthBudget}
+          percentage={budgetPercentage}
+          data={budgetChartData}
+        />
+        <BalanaceCard
+          title="Gastado"
+          amount={MonthSpents}
+          percentage={spentPercentage}
+          data={spentChartData}
+        />
+        <BalanaceCard
+          title="Saldo actual"
+          amount={MonthBalance}
+          percentage={currentBalancePercentage}
+          data={currentBalanceChartData}
+        />
+      </div>
     </div>
   )
 }

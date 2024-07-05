@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 
+import { Payment } from "@/types/paymentType"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -13,18 +14,17 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-export type Payment = {
-  id: string
-  amount: number
-  emoji: string
-  category: string
-  description: string
-}
-
 export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "emoji",
-    header: "Emoji",
+    header: () => <p className="text-center">Emoji</p>,
+    cell: ({ row }) => {
+      const emoji = row.getValue("emoji") as string
+
+      return (
+        <p className="p-3 w-[43px] text-center mx-auto rounded-full bg-muted">{emoji}</p>
+      )
+    },
   },
   {
     accessorKey: "category",
@@ -33,9 +33,8 @@ export const columns: ColumnDef<Payment>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="font-medium"
         >
-          Category
+          <span className="font-semibold">Categoría</span>
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
@@ -43,12 +42,21 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) => {
       const category = row.getValue("category") as string
 
-      return <p className="font-medium">{category}</p>
+      return <p className="font-medium pl-4">{category}</p>
+    },
+  },
+  {
+    accessorKey: "name",
+    header: "Nombre",
+    cell: ({ row }) => {
+      const name = row.getValue("name") as string
+
+      return <p>{name}</p>
     },
   },
   {
     accessorKey: "description",
-    header: "Description",
+    header: "Descripción",
     cell: ({ row }) => {
       const description = row.getValue("description") as string
 
@@ -56,8 +64,22 @@ export const columns: ColumnDef<Payment>[] = [
     },
   },
   {
+    accessorKey: "date",
+    header: "Fecha",
+    cell: ({ row }) => {
+      const date = row.getValue("date") as Date
+      const formatted = new Intl.DateTimeFormat("es-MX", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "2-digit",
+      }).format(date)
+
+      return <p>{formatted}</p>
+    },
+  },
+  {
     accessorKey: "amount",
-    header: () => <p className="text-right">Amount</p>,
+    header: "Cantidad",
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("amount"))
       const formatted = new Intl.NumberFormat("en-US", {
@@ -65,7 +87,7 @@ export const columns: ColumnDef<Payment>[] = [
         currency: "USD",
       }).format(amount)
 
-      return <p className="text-right font-medium">{formatted}</p>
+      return <p className="font-medium">{formatted}</p>
     },
   },
   {

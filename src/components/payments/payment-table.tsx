@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react"
+import { useEffect, useState } from "react"
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -14,6 +14,8 @@ import {
   VisibilityState,
 } from "@tanstack/react-table"
 
+import { Payment } from "@/types/paymentType"
+import getMonthlyPayments from "@/hooks/get-monthly-payments"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -24,6 +26,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import AddPayment from "@/components/payments/add-payment"
 import Menu from "./menu"
 
 interface DataTableProps<TData, TValue> {
@@ -35,12 +38,26 @@ export function PaymentTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
-  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
+  const [sorting, setSorting] = useState<SortingState>([])
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+  const [filter, setFilter] = useState("Category")
+  const [payments, setPayments] = useState(data)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    setIsLoading(true)
+    const monthlyPayments = getMonthlyPayments({
+      payments: data as Payment[],
+      month: new Date().getMonth(),
+      year: new Date().getFullYear(),
+    }) as TData[]
+    setPayments(monthlyPayments)
+    setIsLoading(false)
+  }, [data])
 
   const table = useReactTable({
-    data,
+    data: payments,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -57,61 +74,87 @@ export function PaymentTable<TData, TValue>({
   })
 
   return (
-    <div className="max-w-[590px] lg:max-w-[1080px] mx-auto">
-      <div className="flex items-center py-4">
+    <>
+      <div className="flex flex-col xs:flex-auto xs:grid xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 col-span-3 mt-10 md:mt-20">
+        <div className="text-end col-span-2 lg:hidden">
+          <AddPayment />
+        </div>
+
         <Input
-          placeholder="Filter categories..."
-          value={(table.getColumn("category")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("category")?.setFilterValue(event.target.value)
+          placeholder={`Filtrar ${
+            filter === "Category"
+              ? "categorías..."
+              : filter === "Name"
+                ? "nombres..."
+                : "cantidades..."
+          }`}
+          value={
+            (table.getColumn(filter.toLowerCase())?.getFilterValue() as string) ?? ""
           }
-          className="max-w-sm bg-primary-foreground"
+          onChange={(event) => {
+            return table
+              .getColumn(filter.toLowerCase())
+              ?.setFilterValue(event.target.value)
+          }}
+          className="bg-input-background col-span-2 xs:col-span-1"
         />
+        <Menu setFilter={setFilter} filter={filter} />
+        <div className="text-end hidden col-span-1 lg:block">
+          <AddPayment />
+        </div>
       </div>
-      {/* <Menu table={table} /> */}
-      <div className="rounded-t-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="bg-secondary">
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead
-                      key={header.id}
-                      className="text-center text-primary rounded-md"
-                    >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(header.column.columnDef.header, header.getContext())}
-                    </TableHead>
-                  )
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      key={cell.id}
-                      className="text-center bg-primary-foreground"
-                    >
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
-                  ))}
+      <div className="rounded-t-md border bg-secondary">
+        {isLoading ? (
+          <div className="flex justify-center items-center h-24">
+            <span>Cargando...</span>
+          </div>
+        ) : (
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead
+                        key={header.id}
+                        className="text-primary font-semibold rounded-md"
+                      >
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </TableHead>
+                    )
+                  })}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow key={row.id}>
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id} className="bg-primary-foreground">
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className="bg-primary-foreground h-24 w-full text-center"
+                  >
+                    No se encontraron gastos.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        )}
       </div>
 
       <div className="flex items-center justify-end space-x-2 py-4">
@@ -122,7 +165,7 @@ export function PaymentTable<TData, TValue>({
           disabled={!table.getCanPreviousPage()}
           className="bg-primary-foreground"
         >
-          Previous
+          Anterior
         </Button>
         <Button
           variant="outline"
@@ -131,9 +174,9 @@ export function PaymentTable<TData, TValue>({
           disabled={!table.getCanNextPage()}
           className="bg-primary-foreground"
         >
-          Next
+          Siguiente
         </Button>
       </div>
-    </div>
+    </>
   )
 }
