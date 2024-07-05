@@ -55,7 +55,7 @@ export const updateUser = async ({
         email: email,
       },
     })
-    .then((user) => {
+    .then((user: any) => {
       if (!user) return
       return prisma.user.update({
         where: {
