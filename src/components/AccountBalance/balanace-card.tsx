@@ -1,54 +1,61 @@
-import { Line, LineChart, XAxis, YAxis } from "recharts"
+import { SparkAreaChart } from "@tremor/react"
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent, CardTitle } from "@/components/ui/card"
 
 const BalanaceCard = ({
   title,
-  description,
   amount,
   data,
   percentage,
 }: {
   title: string
-  description: string
   amount: number
-  data: { name: string; uv: number; amt: number }[]
-  percentage: string
+  data?: { month: string; amount: number }[]
+  percentage?: string
 }) => {
-  let color = "text-red-500"
-  if (Number(percentage) > 0) {
-    percentage = `+${percentage}`
-    color = "text-green-500"
+  let color = "text-gray-500"
+
+  if (percentage === undefined) percentage = "0"
+
+  if (Number(percentage)) {
+    if (Number(percentage) > 0) {
+      color = "text-green-500"
+      percentage = `+${percentage}%`
+    } else {
+      color = "text-red-500"
+      percentage = `${percentage}%`
+    }
+  }
+
+  if (title === "Gastado") {
+    color = color === "text-green-500" ? "text-red-500" : "text-green-500"
   }
 
   return (
-    <Card className="min-w-[289px] max-w-[350px] h-[133px] mx-auto lg:w-[325px] xl:w-[350px]">
-      <CardHeader className="flex-row items-center justify-between pb-4">
-        <CardTitle className="font-normal text-lg">{title}</CardTitle>
-        <CardDescription className="text-xs">
-          <span className={color}>{percentage}% </span>
-          {description}
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="flex justify-between">
-        <span className="text-2xl font-medium pt-3">${amount}</span>
-        <LineChart
-          width={130}
-          height={80}
-          data={data}
-          margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
-          className="rounded-xl text-card-foreground"
-        >
-          <XAxis dataKey="name" hide={true} />
-          <YAxis hide={true} />
-          <Line type="monotone" dataKey="uv" stroke={color.split("-")[1]} />
-        </LineChart>
+    <Card className="xs:max-w-[350px]">
+      <CardContent className="p-6 h-full grid grid-cols-2 gap-4">
+        <div className="col-span-1 flex flex-col gap-2">
+          <CardTitle className="font-bold text-md text-nowrap">{title}</CardTitle>
+          <div className="flex flex-col">
+            <span className="text-3xl font-bold">${amount}</span>
+            <p className="text-xs font-bold mt-1">
+              <span className={color}>{percentage} </span>
+              al mes anterior
+            </p>
+          </div>
+        </div>
+        {data && data.length > 1 && (
+          <div className="flex flex-col items-center">
+            <SparkAreaChart
+              data={data}
+              categories={["amount"]}
+              index="month"
+              colors={[color.split("-")[1]]}
+              className="col-span-1 h-[73%] w-[100%] my-auto mx-auto pt-3"
+            />
+            <span className="text-xs font-bold">Gráfica último año</span>
+          </div>
+        )}
       </CardContent>
     </Card>
   )

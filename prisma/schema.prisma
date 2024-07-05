@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id       String    @id @unique @default(cuid())
+  email    String    @unique
+  password String
+  account  Account?
+  expenses Expense[]
+}
+
+model Account {
+  id             String           @id @unique @default(cuid())
+  userId         String           @unique
+  user           User             @relation(fields: [userId], references: [id])
+  budgets        Budget[]
+  currentBalance CurrentBalance[]
+  spents         Spent[]
+}
+
+model Budget {
+  id        String  @id @unique @default(cuid())
+  amount    Float
+  accountId String
+  Account   Account @relation(fields: [accountId], references: [id])
+  date      DateTime @default(now())
+}
+
+model Spent {
+  id        String  @id @unique @default(cuid())
+  amount    Float
+  accountId String
+  Account   Account @relation(fields: [accountId], references: [id])
+  date      DateTime @default(now())
+}
+
+model CurrentBalance {
+  id        String  @id @unique @default(cuid())
+  amount    Float
+  accountId String
+  Account   Account @relation(fields: [accountId], references: [id])
+  date      DateTime @default(now())
+}
+
+model Expense {
+  id          String   @id @unique @default(cuid())
+  emoji       String
+  name        String
+  description String?
+  amount      Float
+  userId      String?
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+  User        User?    @relation(fields: [userId], references: [id])
+}
+
+model Category {
+  id      String    @id @unique @default(cuid())
+  name    String
+  Expense Expense[]
+}

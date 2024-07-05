@@ -1,3 +1,4 @@
+import { bg } from "date-fns/locale"
 import type { Config } from "tailwindcss"
 
 const config: Config = {
@@ -8,14 +9,10 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
     extend: {
+      screens: {
+        xs: "550px",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -50,6 +47,10 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        "input-background": {
+          DEFAULT: "hsl(var(--input-background))",
+          foreground: "hsl(var(--input-background-foreground))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -71,7 +72,20 @@ const config: Config = {
         "accordion-up": "accordion-up 0.1s ease-out",
       },
     },
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
   },
+  safelist: [
+    {
+      pattern:
+        /^(stroke-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
+    },
+  ],
   plugins: [require("tailwindcss-animate")],
 }
 export default config

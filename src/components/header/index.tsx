@@ -11,7 +11,7 @@ export default function Header() {
       </Link>
 
       <span>
-        <UserDropdown image="/default-profile-pic.png" name="andre" />
+        <UserDropdown image="/default-profile-pic.png" name="nico" />
       </span>
     </header>
   )
