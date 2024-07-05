@@ -34,15 +34,15 @@ const BalanaceCard = ({
   return (
     <Card className="xs:max-w-[350px]">
       <CardContent className="p-6 h-full grid grid-cols-2 gap-4">
-        <div className="col-span-1 flex flex-col justify-between gap-2">
+        <div className="col-span-1 flex flex-col gap-2">
           <CardTitle className="font-bold text-md text-nowrap">{title}</CardTitle>
-          <div className="flex flex-col">
+          <div className="flex flex-col justify-between gap-2">
             <span className="text-3xl font-bold">${amount}</span>
+            <p className="text-xs font-bold">
+              <span className={color}>{percentage} </span>
+              al mes anterior
+            </p>
           </div>
-          <p className="text-xs font-bold">
-            <span className={color}>{percentage} </span>
-            al mes anterior
-          </p>
         </div>
         {data && data.length > 1 && (
           <div className="flex flex-col justify-between items-center">
