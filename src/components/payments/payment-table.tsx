@@ -47,14 +47,13 @@ export function PaymentTable<TData, TValue>({
 
   useEffect(() => {
     setIsLoading(true)
+
     const monthlyPayments = getMonthlyPayments({
       payments: data as Payment[],
       month: new Date().getMonth(),
       year: new Date().getFullYear(),
     }) as TData[]
 
-    console.log(monthlyPayments)
-    console.log(new Date().getMonth())
     setPayments(monthlyPayments)
     setIsLoading(false)
   }, [data])
