@@ -42,17 +42,6 @@ const BalanaceCard = ({
         </div>
         {data && data.length > 1 && (
           <div className="flex flex-col justify-between items-center">
-            {title === "Presupuesto" && (
-              <div className="w-full text-right">
-                <Button
-                  variant="ghost"
-                  className="rounded-full border bg-card text-card-foreground shadow"
-                  size="icon"
-                >
-                  <span className="font-semibold text-2xl mb-[3px]">+</span>
-                </Button>
-              </div>
-            )}
             <SparkAreaChart
               data={data}
               categories={["amount"]}
