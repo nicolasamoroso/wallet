@@ -1,4 +1,4 @@
-import { Payment } from "@/types/paymentType"
+import { Payment } from "@/types/payment-type"
 
 const CalculateCurrentSpents = ({
   accountId,

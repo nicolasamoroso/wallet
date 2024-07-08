@@ -1,16 +1,14 @@
-import { Budget_CurrentBalance_Spent } from "@/app/page"
+import { Card } from "@/types/card-type"
 
-const getMonthlyTotals = (
-  items: Budget_CurrentBalance_Spent[]
-): Budget_CurrentBalance_Spent[] => {
+const getMonthlyTotals = (items: Card[]): Card[] => {
   return items.reduce((acc, item) => {
-    const month = new Date(item.date).getMonth()
-    const year = new Date(item.date).getFullYear()
+    const date = new Date(item.date)
+    const month = date.getMonth()
+    const year = date.getFullYear()
 
     const monthIndex = acc.findIndex((i) => {
-      return (
-        new Date(i.date).getMonth() === month && new Date(i.date).getFullYear() === year
-      )
+      const iDate = new Date(i.date)
+      return iDate.getMonth() === month && iDate.getFullYear() === year
     })
 
     if (monthIndex === -1) {
@@ -18,14 +16,14 @@ const getMonthlyTotals = (
         id: item.id,
         amount: item.amount,
         accountId: item.accountId,
-        date: new Date(item.date.getFullYear(), item.date.getMonth(), 1),
+        date: new Date(date.getFullYear(), date.getMonth(), 15),
       })
     } else {
       acc[monthIndex].amount += item.amount
     }
 
     return acc
-  }, [] as Budget_CurrentBalance_Spent[])
+  }, [] as Card[])
 }
 
 export default getMonthlyTotals

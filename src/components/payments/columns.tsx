@@ -3,7 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 
-import { Payment } from "@/types/paymentType"
+import { Payment } from "@/types/payment-type"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -67,7 +67,7 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "date",
     header: "Fecha",
     cell: ({ row }) => {
-      const date = row.getValue("date") as Date
+      const date = new Date(row.getValue("date") as string)
       const formatted = new Intl.DateTimeFormat("es-MX", {
         day: "2-digit",
         month: "2-digit",

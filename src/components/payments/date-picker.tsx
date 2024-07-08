@@ -2,7 +2,7 @@
 
 import { CalendarIcon } from "@radix-ui/react-icons"
 import { format } from "date-fns"
-import { ControllerRenderProps } from "react-hook-form"
+import { ControllerRenderProps, FieldValues } from "react-hook-form"
 
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
@@ -10,18 +10,9 @@ import { FormControl, FormItem, FormLabel, FormMessage } from "@/components/ui/f
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { cn } from "@/utils/clsx"
 
-const DatePicker = ({
-  field,
-}: {
-  field: ControllerRenderProps<
-    {
-      dob: Date
-    },
-    "dob"
-  >
-}) => {
+const DatePicker = ({ field }: { field: ControllerRenderProps<FieldValues, "dob"> }) => {
   return (
-    <FormItem className="flex flex-col gap-2">
+    <FormItem className="flex flex-col gap-2 col-span-6">
       <FormLabel htmlFor="date">Fecha</FormLabel>
       <Popover>
         <PopoverTrigger asChild>
@@ -29,11 +20,11 @@ const DatePicker = ({
             <Button
               variant={"outline"}
               className={cn(
-                "w-[165px] pl-3 text-left font-normal bg-input-background",
+                "pl-3 text-left font-normal bg-input-background",
                 !field.value && "text-muted-foreground"
               )}
             >
-              {field.value ? format(field.value, "PPP") : <span>Elija una fecha</span>}
+              {field.value ? format(field.value, "PPP") : <span>01/01/2024</span>}
               <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
             </Button>
           </FormControl>

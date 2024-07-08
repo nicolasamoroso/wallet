@@ -1,5 +1,6 @@
 import { SparkAreaChart } from "@tremor/react"
 
+import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardTitle } from "@/components/ui/card"
 
 const BalanaceCard = ({
@@ -14,17 +15,12 @@ const BalanaceCard = ({
   percentage?: string
 }) => {
   let color = "text-gray-500"
+  let formattedPercentage = percentage
+    ? `${Number(percentage) > 0 ? "+" : ""}${percentage}%`
+    : "0"
 
-  if (percentage === undefined) percentage = "0"
-
-  if (Number(percentage)) {
-    if (Number(percentage) > 0) {
-      color = "text-green-500"
-      percentage = `+${percentage}%`
-    } else {
-      color = "text-red-500"
-      percentage = `${percentage}%`
-    }
+  if (percentage) {
+    color = Number(percentage) > 0 ? "text-green-500" : "text-red-500"
   }
 
   if (title === "Gastado") {
@@ -39,13 +35,24 @@ const BalanaceCard = ({
           <div className="flex flex-col justify-between gap-2">
             <span className="text-3xl font-bold">${amount}</span>
             <p className="text-xs font-bold">
-              <span className={color}>{percentage} </span>
+              <span className={color}>{formattedPercentage} </span>
               al mes anterior
             </p>
           </div>
         </div>
         {data && data.length > 1 && (
           <div className="flex flex-col justify-between items-center">
+            {title === "Presupuesto" && (
+              <div className="w-full text-right">
+                <Button
+                  variant="ghost"
+                  className="rounded-full border bg-card text-card-foreground shadow"
+                  size="icon"
+                >
+                  <span className="font-semibold text-2xl mb-[3px]">+</span>
+                </Button>
+              </div>
+            )}
             <SparkAreaChart
               data={data}
               categories={["amount"]}

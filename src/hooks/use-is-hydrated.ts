@@ -1,11 +1,11 @@
-import * as React from "react"
+import { useEffect, useState } from "react"
 
 let globalIsHydrated = false
 
 export const useIsHydrated = () => {
-  const [isHydrated, setIsHydrated] = React.useState(globalIsHydrated)
+  const [isHydrated, setIsHydrated] = useState(globalIsHydrated)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsHydrated(true)
     globalIsHydrated = true
   }, [])
