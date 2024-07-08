@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -49,9 +48,11 @@ const FormSchema = z.object({
   amount: z.string({
     required_error: "Debe ingresar una cantidad.",
   }),
-  description: z.string({
-    required_error: "Debe ingresar una descripción.",
-  }),
+  description: z
+    .string({
+      required_error: "Debe ingresar una descripción.",
+    })
+    .optional(),
   category: z.string({
     required_error: "Debe ingresar una categoría.",
   }),
@@ -68,18 +69,16 @@ const AddPayment = ({
 }) => {
   const [open, setOpen] = useState(false)
 
-  const form = useForm({
+  const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
+    defaultValues: {
+      description: "",
+    },
   })
 
-  function onSubmit(data: any) {
+  function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+      title: "Gasto agregado",
     })
 
     const payment = {

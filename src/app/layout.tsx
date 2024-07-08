@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 
+import { Toaster } from "@/components/ui/toaster"
+
 import "./globals.css"
 
 import Header from "@/components/header"
@@ -18,7 +20,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={cn(inter.className, "px-4", "bg-background")}>
         <Header />
-        {children}
+        <main>{children}</main>
+        <Toaster />
       </body>
     </html>
   )
