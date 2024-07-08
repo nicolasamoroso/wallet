@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { CalendarIcon } from "@radix-ui/react-icons"
 import { format } from "date-fns"
 import { ControllerRenderProps, FieldValues } from "react-hook-form"
@@ -25,11 +24,10 @@ const DatePicker = ({
     "dob"
   >
 }) => {
-  const [open, setOpen] = useState(false)
   return (
     <FormItem className="flex flex-col gap-2 col-span-6">
       <FormLabel htmlFor="date">Fecha</FormLabel>
-      <Popover onOpenChange={setOpen} open={open}>
+      <Popover>
         <PopoverTrigger asChild>
           <FormControl>
             <Button
@@ -48,12 +46,8 @@ const DatePicker = ({
           <Calendar
             mode="single"
             selected={field.value}
-            onSelect={() => {
-              setOpen(false)
-              field.onChange
-            }}
+            onSelect={field.onChange}
             disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
-            initialFocus
           />
         </PopoverContent>
       </Popover>
