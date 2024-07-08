@@ -15,17 +15,17 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 export const columns: ColumnDef<Payment>[] = [
-  {
-    accessorKey: "emoji",
-    header: () => <p className="text-center">Emoji</p>,
-    cell: ({ row }) => {
-      const emoji = row.getValue("emoji") as string
+  // {
+  //   accessorKey: "emoji",
+  //   header: () => <p className="text-center">Emoji</p>,
+  //   cell: ({ row }) => {
+  //     const emoji = row.getValue("emoji") as string
 
-      return (
-        <p className="p-3 w-[43px] text-center mx-auto rounded-full bg-muted">{emoji}</p>
-      )
-    },
-  },
+  //     return (
+  //       <p className="p-3 w-[43px] text-center mx-auto rounded-full bg-muted">{emoji}</p>
+  //     )
+  //   },
+  // },
   {
     accessorKey: "category",
     header: ({ column }) => {
