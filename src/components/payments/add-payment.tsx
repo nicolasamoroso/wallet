@@ -32,14 +32,14 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
-import EmojiPicker from "@/components/emoji/emoji-picker"
+// import EmojiPicker from "@/components/emoji/emoji-picker"
 import DatePicker from "@/components/payments/date-picker"
 import { cn } from "@/utils/clsx"
 
 const FormSchema = z.object({
-  emoji: z.string({
-    required_error: "Debe seleccionar un emoji.",
-  }),
+  // emoji: z.string({
+  //   required_error: "Debe seleccionar un emoji.",
+  // }),
   name: z.string({
     required_error: "Debe ingresar un nombre.",
   }),
@@ -85,7 +85,7 @@ const AddPayment = ({
     const payment = {
       id: "1" + Math.random(),
       amount: Number(data.amount),
-      emoji: data.emoji,
+      // emoji: data.emoji,
       category: data.category,
       name: data.name,
       description: data.description,
