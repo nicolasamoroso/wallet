@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react"
 
-import { Payment } from "@/types/paymentType"
+import { Payment } from "@/types/payment-type"
 import { columns } from "./columns"
 import { PaymentTable } from "./payment-table"
 

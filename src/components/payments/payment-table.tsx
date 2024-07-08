@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -14,7 +14,7 @@ import {
   VisibilityState,
 } from "@tanstack/react-table"
 
-import { Payment } from "@/types/paymentType"
+import { Payment } from "@/types/payment-type"
 import getMonthlyPayments from "@/hooks/get-monthly-payments"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -32,11 +32,13 @@ import Menu from "./menu"
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  setData: Dispatch<SetStateAction<any[]>>
 }
 
 export function PaymentTable<TData, TValue>({
   columns,
   data,
+  setData,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
@@ -79,7 +81,7 @@ export function PaymentTable<TData, TValue>({
     <>
       <div className="flex flex-col xs:flex-auto xs:grid xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 col-span-3">
         <div className="text-end col-span-2 lg:hidden">
-          <AddPayment />
+          <AddPayment className="w-full" payments={data as Payment[]} setData={setData} />
         </div>
 
         <Input
@@ -102,7 +104,7 @@ export function PaymentTable<TData, TValue>({
         />
         <Menu setFilter={setFilter} filter={filter} />
         <div className="text-end hidden col-span-1 lg:block">
-          <AddPayment />
+          <AddPayment payments={data as Payment[]} setData={setData} />
         </div>
       </div>
       <div className="rounded-t-md border bg-secondary">

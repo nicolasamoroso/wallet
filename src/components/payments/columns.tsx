@@ -3,7 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 
-import { Payment } from "@/types/paymentType"
+import { Payment } from "@/types/payment-type"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -15,17 +15,17 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 export const columns: ColumnDef<Payment>[] = [
-  {
-    accessorKey: "emoji",
-    header: () => <p className="text-center">Emoji</p>,
-    cell: ({ row }) => {
-      const emoji = row.getValue("emoji") as string
+  // {
+  //   accessorKey: "emoji",
+  //   header: () => <p className="text-center">Emoji</p>,
+  //   cell: ({ row }) => {
+  //     const emoji = row.getValue("emoji") as string
 
-      return (
-        <p className="p-3 w-[43px] text-center mx-auto rounded-full bg-muted">{emoji}</p>
-      )
-    },
-  },
+  //     return (
+  //       <p className="p-3 w-[43px] text-center mx-auto rounded-full bg-muted">{emoji}</p>
+  //     )
+  //   },
+  // },
   {
     accessorKey: "category",
     header: ({ column }) => {
@@ -67,7 +67,7 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "date",
     header: "Fecha",
     cell: ({ row }) => {
-      const date = row.getValue("date") as Date
+      const date = new Date(row.getValue("date") as string)
       const formatted = new Intl.DateTimeFormat("es-MX", {
         day: "2-digit",
         month: "2-digit",

@@ -1,17 +1,17 @@
-import { Budget_CurrentBalance_Spent } from "@/app/page"
+import { Card } from "@/types/card-type"
 
-const CanHaveChart = ({ data }: { data: Budget_CurrentBalance_Spent[] }) => {
+const CanHaveChart = ({ data }: { data: Card[] }) => {
   let percentage
   let chartData
 
   if (data.length > 1) {
     const thisMonthData = data.filter((item) => {
       return new Date(item.date).getMonth() === new Date().getMonth()
-    }) as Budget_CurrentBalance_Spent[]
+    }) as Card[]
 
     const lastMonthData = data.filter((item) => {
       return new Date(item.date).getMonth() === new Date().getMonth() - 1
-    }) as Budget_CurrentBalance_Spent[]
+    }) as Card[]
 
     const thisMonthAmount = thisMonthData[0].amount
     const lastMonthAmount = lastMonthData[0].amount

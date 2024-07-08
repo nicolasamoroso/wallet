@@ -1,12 +1,12 @@
-import { Budget_CurrentBalance_Spent } from "@/app/page"
+import { Card } from "@/types/card-type"
 
 const CalculateCurrentBalances = ({
   budgets,
   spents,
   accountId,
 }: {
-  budgets: Budget_CurrentBalance_Spent[]
-  spents: Budget_CurrentBalance_Spent[]
+  budgets: Card[]
+  spents: Card[]
   accountId: string
 }) => {
   const spentMap = new Map()
