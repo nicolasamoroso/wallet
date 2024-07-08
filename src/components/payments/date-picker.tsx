@@ -2,7 +2,8 @@
 
 import { CalendarIcon } from "@radix-ui/react-icons"
 import { format } from "date-fns"
-import { ControllerRenderProps, FieldValues } from "react-hook-form"
+import { es } from "date-fns/locale"
+import { ControllerRenderProps } from "react-hook-form"
 
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
@@ -48,6 +49,8 @@ const DatePicker = ({
             selected={field.value}
             onSelect={field.onChange}
             disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
+            locale={es}
+            weekStartsOn={0}
           />
         </PopoverContent>
       </Popover>

@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { CalendarIcon } from "@radix-ui/react-icons"
 import { addDays, format } from "date-fns"
+import { es } from "date-fns/locale"
 import { DateRange } from "react-day-picker"
 
 import { Button } from "@/components/ui/button"
@@ -50,6 +51,8 @@ export function DatePickerWithRange({ className }: { className: string }) {
             selected={date}
             onSelect={setDate}
             numberOfMonths={2}
+            locale={es}
+            weekStartsOn={0}
           />
         </PopoverContent>
       </Popover>
