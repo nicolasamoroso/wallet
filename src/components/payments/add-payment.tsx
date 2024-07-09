@@ -31,14 +31,10 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
-// import EmojiPicker from "@/components/emoji/emoji-picker"
 import DatePicker from "@/components/payments/date-picker"
 import { cn } from "@/utils/clsx"
 
 const FormSchema = z.object({
-  // emoji: z.string({
-  //   required_error: "Debe seleccionar un emoji.",
-  // }),
   name: z.string({
     required_error: "Debe ingresar un nombre.",
   }),
@@ -84,7 +80,6 @@ const AddPayment = ({
     const payment = {
       id: "1" + Math.random(),
       amount: Number(data.amount),
-      // emoji: data.emoji,
       category: data.category,
       name: data.name,
       description: data.description,
@@ -121,26 +116,20 @@ const AddPayment = ({
           + Agregar Gastos
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px]" aria-describedby="dialog-content">
         <DialogHeader>
-          <DialogTitle className="pb-7">Agregar nuevo saldo</DialogTitle>
+          <DialogTitle className="pb-7">Agregar nuevo gasto</DialogTitle>
         </DialogHeader>
+        <p id="dialog-description" className="sr-only">
+          Rellene el formulario para poder agregar.
+        </p>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="col-span-9">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="col-span-9"
+            aria-describedby="dialog-description"
+          >
             <div className="grid grid-cols-12 gap-3 mb-3">
-              {/* <FormField
-                control={form.control}
-                name="emoji"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col col-span-2 gap-2">
-                    <FormLabel htmlFor="emoji">Emoji</FormLabel>
-                    <FormControl>
-                      <EmojiPicker field={field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
               <FormField
                 control={form.control}
                 name="category"

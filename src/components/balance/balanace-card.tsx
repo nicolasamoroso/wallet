@@ -1,7 +1,5 @@
-import { SparkAreaChart } from "@tremor/react"
-
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardTitle } from "@/components/ui/card"
+import BalanceChart from "@/components/balance/balance-chart"
 
 const BalanaceCard = ({
   title,
@@ -19,13 +17,10 @@ const BalanaceCard = ({
     ? `${Number(percentage) > 0 ? "+" : ""}${percentage}%`
     : "0"
 
-  if (percentage) {
-    color = Number(percentage) > 0 ? "text-green-500" : "text-red-500"
-  }
+  if (percentage) color = Number(percentage) > 0 ? "text-green-500" : "text-red-500"
 
-  if (title === "Gastado") {
+  if (title === "Gastado")
     color = color === "text-green-500" ? "text-red-500" : "text-green-500"
-  }
 
   return (
     <Card className="xs:max-w-[350px]">
@@ -40,18 +35,7 @@ const BalanaceCard = ({
             </p>
           </div>
         </div>
-        {data && data.length > 1 && (
-          <div className="flex flex-col justify-between items-center">
-            <SparkAreaChart
-              data={data}
-              categories={["amount"]}
-              index="month"
-              colors={[color.split("-")[1]]}
-              className="col-span-1 h-[73%] w-[100%] my-auto mx-auto"
-            />
-            <span className="text-xs font-bold">Gráfica último año</span>
-          </div>
-        )}
+        <BalanceChart data={data} color={color} />
       </CardContent>
     </Card>
   )
