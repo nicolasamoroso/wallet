@@ -99,25 +99,25 @@ export const columns: ColumnDef<Payment>[] = [
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
+              <span className="sr-only">Abrir menú</span>
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-              className="hover:cursor-pointer"
-            >
-              Copy payment ID
-            </DropdownMenuItem>
+            <DropdownMenuLabel>Opciones</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="hover:cursor-pointer">
-              View customer
+            <DropdownMenuItem
+              onClick={() => {
+                const date = new Date(payment.date)
+                navigator.clipboard.writeText(
+                  `Categoría: ${payment.category}\nNombre: ${payment.name}\nDescripción: ${payment.description}\nFecha: ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}\nCantidad: ${payment.amount}`
+                )
+              }}
+            >
+              Copiar detalles del gasto
             </DropdownMenuItem>
-            <DropdownMenuItem className="hover:cursor-pointer">
-              View payment details
-            </DropdownMenuItem>
+            <DropdownMenuItem>Detalles del gasto</DropdownMenuItem>
+            <DropdownMenuItem>Eliminar gasto</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )
