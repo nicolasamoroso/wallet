@@ -3,15 +3,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 const Breakdown = ({
   data,
+  className,
 }: {
   data: {
     name: string
     amount: number
     id: number
   }[]
+  className?: string
 }) => {
   return (
-    <Card className="col-span-2">
+    <Card className={className}>
       <CardHeader>
         <CardTitle className="text-xl font-medium">Desglose de los gastos</CardTitle>
       </CardHeader>
