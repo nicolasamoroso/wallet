@@ -180,6 +180,7 @@ const AddCategories = ({
                         <Input
                           id="textColor"
                           type="color"
+                          value={field.value}
                           onChange={field.onChange}
                           onBlur={field.onBlur}
                           className="w-full bg-input-background"
