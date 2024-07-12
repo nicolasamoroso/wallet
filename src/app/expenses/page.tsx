@@ -16,12 +16,6 @@ export default function Home() {
 
   const breakdownData = getMonthlyBreakdown(data)
 
-  const pieData = breakdownData.map((data) => ({
-    category: data.name,
-    amounts: data.amount,
-    fill: `var(--color-${data.name.toLowerCase()})`,
-  }))
-
   return (
     <>
       <div className="xs:max-w-[590px] lg:max-w-[1080px] mx-auto flex flex-col gap-3">
@@ -31,7 +25,7 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-y-3 lg:gap-x-3">
           <div className="col-span-2 lg:col-span-1 grid grid-cols-2 gap-3">
-            <Balance data={pieData} />
+            <Balance data={breakdownData} />
             <Breakdown data={breakdownData} />
           </div>
           <LinearChart data={data} />
