@@ -41,7 +41,7 @@ const Balance = ({
           </p>
         </CardContent>
       </div>
-      {window.innerWidth >= 1024 ? <DonutChart data={formattedData} /> : null}
+      <DonutChart data={formattedData} />
     </Card>
   )
 }
