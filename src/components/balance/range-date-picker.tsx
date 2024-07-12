@@ -28,6 +28,7 @@ export function DatePickerWithRange({ className }: { className: string }) {
               "min-w-[289px] justify-start text-left font-normal bg-input-background",
               !date && "text-muted-foreground"
             )}
+            disabled
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
             {date?.from ? (

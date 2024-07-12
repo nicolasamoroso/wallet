@@ -1,7 +1,8 @@
+import { Category } from "@/types/category-type"
+
 export type Payment = {
   id: string
-  emoji: string
-  category: string
+  category: Category
   name: string
   description: string
   amount: number

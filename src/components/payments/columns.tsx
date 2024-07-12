@@ -1,48 +1,43 @@
-"use client"
-
 import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import {
+  ArrowUpDown,
+  ClipboardCopy,
+  DeleteIcon,
+  FilePenIcon,
+  MoreHorizontal,
+  TagIcon,
+} from "lucide-react"
 
+import { Category } from "@/types/category-type"
 import { Payment } from "@/types/payment-type"
+import capitalizeFirstLetter from "@/hooks/capitalize-first-letter"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
 export const columns: ColumnDef<Payment>[] = [
-  // {
-  //   accessorKey: "emoji",
-  //   header: () => <p className="text-center">Emoji</p>,
-  //   cell: ({ row }) => {
-  //     const emoji = row.getValue("emoji") as string
-
-  //     return (
-  //       <p className="p-3 w-[43px] text-center mx-auto rounded-full bg-muted">{emoji}</p>
-  //     )
-  //   },
-  // },
   {
-    accessorKey: "category",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          <span className="font-semibold">Categoría</span>
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
+    accessorKey: "date",
+    header: "Fecha",
     cell: ({ row }) => {
-      const category = row.getValue("category") as string
+      const date = new Date(row.getValue("date") as string)
+      const formattedDay = new Intl.DateTimeFormat("es-AR", { day: "2-digit" }).format(
+        date
+      )
+      const formattedMonth = new Intl.DateTimeFormat("es-AR", { month: "short" }).format(
+        date
+      )
+      const capitalizedMonth = capitalizeFirstLetter(formattedMonth)
 
-      return <p className="font-medium pl-4">{category}</p>
+      return (
+        <span>
+          {formattedDay} {capitalizedMonth}
+        </span>
+      )
     },
   },
   {
@@ -51,30 +46,37 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) => {
       const name = row.getValue("name") as string
 
-      return <p>{name}</p>
+      return <span>{name}</span>
     },
   },
   {
-    accessorKey: "description",
-    header: "Descripción",
-    cell: ({ row }) => {
-      const description = row.getValue("description") as string
-
-      return <p>{description}</p>
+    accessorKey: "category",
+    header: ({ column }) => {
+      return (
+        // <Button
+        //   variant="ghost"
+        //   onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        //   className="px-0"
+        // >
+        <span className="font-semibold">Categoría</span>
+        // <ArrowUpDown className="ml-2 h-4 w-4" />
+        // </Button>
+      )
     },
-  },
-  {
-    accessorKey: "date",
-    header: "Fecha",
     cell: ({ row }) => {
-      const date = new Date(row.getValue("date") as string)
-      const formatted = new Intl.DateTimeFormat("es-MX", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "2-digit",
-      }).format(date)
-
-      return <p>{formatted}</p>
+      const category = row.getValue("category") as Category
+      // bg-blue-200 text-blue-800
+      // bg-green-200 text-green-800
+      // bg-red-200 text-red-800
+      return (
+        <span
+          className="px-2 py-1 rounded-md flex items-center gap-2 w-fit"
+          style={{ color: category.textColor, backgroundColor: category.color }}
+        >
+          <TagIcon className="w-4 h-4" />
+          {category.name}
+        </span>
+      )
     },
   },
   {
@@ -87,7 +89,7 @@ export const columns: ColumnDef<Payment>[] = [
         currency: "USD",
       }).format(amount)
 
-      return <p className="font-medium">{formatted}</p>
+      return <span className="font-medium">{formatted}</span>
     },
   },
   {
@@ -98,14 +100,15 @@ export const columns: ColumnDef<Payment>[] = [
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
+            <Button
+              variant="ghost"
+              className="h-8 w-full p-0 hover:!bg-primary-foreground"
+            >
               <span className="sr-only">Abrir menú</span>
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Opciones</DropdownMenuLabel>
-            <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => {
                 const date = new Date(payment.date)
@@ -113,11 +116,19 @@ export const columns: ColumnDef<Payment>[] = [
                   `Categoría: ${payment.category}\nNombre: ${payment.name}\nDescripción: ${payment.description}\nFecha: ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}\nCantidad: ${payment.amount}`
                 )
               }}
+              className="w-full flex items-center space-x-2 hover:bg-gray-200 active:bg-gray-300 py-2 px-2 rounded-lg text-gray-500"
             >
-              Copiar detalles del gasto
+              <ClipboardCopy className="w-4 h-4" />
+              <span className="text-sm font-medium">Copiar</span>
             </DropdownMenuItem>
-            <DropdownMenuItem>Detalles del gasto</DropdownMenuItem>
-            <DropdownMenuItem>Eliminar gasto</DropdownMenuItem>
+            <DropdownMenuItem className="w-full flex items-center space-x-2 hover:bg-gray-200 active:bg-gray-300 py-2 px-2 rounded-lg text-gray-500">
+              <FilePenIcon className="w-4 h-4" />
+              <span className="text-sm font-medium">Editar</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="w-full flex items-center space-x-2 hover:bg-gray-200 active:bg-gray-300 py-2 px-2 rounded-lg text-gray-500">
+              <DeleteIcon className="w-4 h-4" />
+              <span className="text-sm font-medium">Eliminar</span>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )

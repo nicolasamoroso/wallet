@@ -1,26 +1,20 @@
 import { Payment } from "@/types/payment-type"
 
-const getMonthlyPayments = ({
-  payments,
-  month,
-  year,
-}: {
-  payments: Payment[]
-  month: number
-  year: number
-}): Payment[] => {
+const getMonthlyPayments = ({ payments }: { payments: Payment[] }): Payment[] => {
   return payments.reduce((acc, item) => {
-    const itemMonth = new Date(item.date).getMonth()
-    const itemYear = new Date(item.date).getFullYear()
+    const today = new Date()
+    const last30Days = new Date(today)
+    last30Days.setDate(today.getDate() - 30)
 
-    if (itemMonth === month && itemYear === year) {
+    const paymentDate = new Date(item.date)
+
+    if (paymentDate >= last30Days) {
       acc.push({
         id: item.id,
-        emoji: item.emoji,
         category: item.category,
         name: item.name,
         description: item.description,
-        amount: `${item.amount}`,
+        amount: item.amount,
         date: item.date,
       })
     }
