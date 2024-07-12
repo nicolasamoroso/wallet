@@ -52,8 +52,8 @@ export function PaymentTable<TData, TValue>({
 
     const monthlyPayments = getMonthlyPayments({
       payments: data as Payment[],
-      month: new Date().getMonth(),
-      year: new Date().getFullYear(),
+      // month: new Date().getMonth(),
+      // year: new Date().getFullYear(),
     }) as TData[]
 
     setPayments(monthlyPayments)
@@ -81,7 +81,7 @@ export function PaymentTable<TData, TValue>({
     <>
       <div className="flex flex-col xs:flex-auto xs:grid xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 col-span-3">
         <div className="text-end col-span-2 lg:hidden">
-          <AddPayment className="w-full" payments={data as Payment[]} setData={setData} />
+          {/* <AddPayment className="w-full" payments={data as Payment[]} setData={setData} /> */}
         </div>
 
         <Input
@@ -104,7 +104,7 @@ export function PaymentTable<TData, TValue>({
         />
         <Menu setFilter={setFilter} filter={filter} />
         <div className="text-end hidden col-span-1 lg:block">
-          <AddPayment payments={data as Payment[]} setData={setData} />
+          {/* <AddPayment payments={data as Payment[]} setData={setData} /> */}
         </div>
       </div>
       <div className="rounded-t-md border bg-secondary">
