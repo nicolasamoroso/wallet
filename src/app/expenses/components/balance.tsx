@@ -2,15 +2,18 @@ import { TrendingUpIcon } from "lucide-react"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import DonutChart from "@/app/expenses/components/donut-chart"
+import { cn } from "@/utils/clsx"
 
 const Balance = ({
   data,
+  className,
 }: {
   data: {
     name: string
     amount: number
     id: number
   }[]
+  className?: string
 }) => {
   const formattedData = data.map((d) => ({
     category: d.name,
@@ -23,8 +26,8 @@ const Balance = ({
     .toLocaleString("es-AR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })
 
   return (
-    <Card className="flex h-fit col-span-2">
-      <div className="flex flex-col justify-between">
+    <Card className={cn("flex h-fit lg:block", className)}>
+      <div>
         <CardHeader>
           <CardTitle className="text-xl font-medium">
             Total en los últimos 30 días
@@ -38,7 +41,7 @@ const Balance = ({
           </p>
         </CardContent>
       </div>
-      <DonutChart data={formattedData} />
+      {window.innerWidth >= 1024 ? <DonutChart data={formattedData} /> : null}
     </Card>
   )
 }

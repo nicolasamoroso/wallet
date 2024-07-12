@@ -40,7 +40,9 @@ const DonutChart = ({
           <Pie data={data} dataKey="amounts" nameKey="category" innerRadius={25} />
         </PieChart>
       </ChartContainer>
-      <span className="flex justify-center text-xs">Cantidades por categoría</span>
+      {data && data.length > 0 && (
+        <span className="flex justify-center text-xs">Cantidades por categoría</span>
+      )}
     </div>
   )
 }

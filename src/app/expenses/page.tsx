@@ -23,13 +23,20 @@ export default function Home() {
           <h1 className="text-3xl font-semibold col-span-2">Gastos</h1>
           <DatePickerWithRange className="col-span-1" />
         </div>
-        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-y-3 lg:gap-x-3">
-          <div className="col-span-2 lg:col-span-1 grid grid-cols-2 gap-3">
-            <Balance data={breakdownData} />
-            <Breakdown data={breakdownData} />
+        {data && data.length > 0 ? (
+          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-y-3 lg:gap-x-3">
+            <div className="col-span-2 lg:col-span-1 flex flex-col grid-cols-2 lg:grid-cols-1 gap-3">
+              <Balance data={breakdownData} className="col-span-2" />
+              <Breakdown data={breakdownData} className="col-span-2" />
+            </div>
+            <LinearChart data={data} />
           </div>
-          <LinearChart data={data} />
-        </div>
+        ) : (
+          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-y-3 lg:gap-x-3">
+            <Balance data={breakdownData} className="col-span-2 lg:col-span-1" />
+            <Breakdown data={breakdownData} className="col-span-2 lg:col-span-2" />
+          </div>
+        )}
         <AddCategories categories={categories} setCategories={setCategories} />
         <div className="col-span-3 pt-10">
           <PaymentTable

@@ -97,6 +97,8 @@ const AddCategories = ({
               form.reset()
               setOpen(true)
               setName("")
+              setColor("#fecaca")
+              setTextColor("#991b1b")
             }}
             className="space-x-2"
           >
