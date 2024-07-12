@@ -12,11 +12,14 @@ const Balance = ({
     id: number
   }[]
 }) => {
-  const formattedData = data.map((d) => ({
-    category: d.name,
-    amounts: d.amount,
-    fill: `var(--color-${d.name.toLowerCase()})`,
-  }))
+  const formattedData = data.map((d) => {
+    const name = d.name ? d.name.toLowerCase() : ""
+    return {
+      category: d.name,
+      amounts: d.amount,
+      fill: `var(--color-${name})`,
+    }
+  })
 
   const totalAmount = formattedData
     .reduce((acc, { amounts }) => acc + amounts, 0)

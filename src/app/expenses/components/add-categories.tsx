@@ -70,7 +70,12 @@ const AddCategories = ({
     } as Category
 
     if (
-      categories.some((cat) => cat.name.toLowerCase() === category.name.toLowerCase())
+      categories.some(
+        (cat) =>
+          cat.name &&
+          category.name &&
+          cat.name.toLowerCase() === category.name.toLowerCase()
+      )
     ) {
       toast({
         title: "La categoría ya existe",
