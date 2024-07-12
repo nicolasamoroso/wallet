@@ -208,7 +208,7 @@ const AddCategories = ({
                 </div>
               )}
               <DialogFooter>
-                <Button type="submit" className="pt-3 md:pt-0">
+                <Button type="submit" className="mt-4 md:mt-0">
                   Crear
                 </Button>
               </DialogFooter>
