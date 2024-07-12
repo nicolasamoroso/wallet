@@ -185,6 +185,7 @@ const AddCategories = ({
                         <Input
                           id="textColor"
                           type="color"
+                          value={field.value}
                           onChange={field.onChange}
                           onBlur={field.onBlur}
                           className="w-full bg-input-background"
@@ -212,7 +213,9 @@ const AddCategories = ({
                 </div>
               )}
               <DialogFooter>
-                <Button type="submit">Crear</Button>
+                <Button type="submit" className="mt-4 md:mt-0">
+                  Crear
+                </Button>
               </DialogFooter>
             </form>
           </Form>
