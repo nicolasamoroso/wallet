@@ -99,12 +99,14 @@ export default function PaymentTable<TData, TValue>({
                 : "cantidades..."
           }`}
           value={
-            (table.getColumn(filter.toLowerCase())?.getFilterValue() as string) ?? ""
+            (filter?.toLowerCase() &&
+              (table.getColumn(filter.toLowerCase())?.getFilterValue() as string)) ??
+            ""
           }
           onChange={(event) => {
-            return table
-              .getColumn(filter.toLowerCase())
-              ?.setFilterValue(event.target.value)
+            if (filter) {
+              table.getColumn(filter.toLowerCase())?.setFilterValue(event.target.value)
+            }
           }}
           className="bg-input-background col-span-2 xs:col-span-1"
         />
