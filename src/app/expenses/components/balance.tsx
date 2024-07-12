@@ -7,12 +7,18 @@ const Balance = ({
   data,
 }: {
   data: {
-    category: string
-    amounts: number
-    fill: string
+    name: string
+    amount: number
+    id: number
   }[]
 }) => {
-  const totalAmount = data
+  const formattedData = data.map((d) => ({
+    category: d.name,
+    amounts: d.amount,
+    fill: `var(--color-${d.name.toLowerCase()})`,
+  }))
+
+  const totalAmount = formattedData
     .reduce((acc, { amounts }) => acc + amounts, 0)
     .toLocaleString("es-AR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })
 
@@ -32,7 +38,7 @@ const Balance = ({
           </p>
         </CardContent>
       </div>
-      <DonutChart data={data} />
+      <DonutChart data={formattedData} />
     </Card>
   )
 }
