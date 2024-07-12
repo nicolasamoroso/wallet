@@ -1,8 +1,10 @@
 import { Dispatch, SetStateAction, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { PlusCircle } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
+import { Category } from "@/types/category-type"
 import { Payment } from "@/types/payment-type"
 import { Button } from "@/components/ui/button"
 import {
@@ -58,10 +60,12 @@ const AddPayment = ({
   className,
   payments,
   setData,
+  categories,
 }: {
   className?: string
   payments: Payment[]
   setData: Dispatch<SetStateAction<any[]>>
+  categories: Category[]
 }) => {
   const [open, setOpen] = useState(false)
 
@@ -77,10 +81,12 @@ const AddPayment = ({
       title: "Gasto agregado",
     })
 
+    const categoryData = categories.find((cat) => cat.name === data.category) as Category
+
     const payment = {
       id: "1" + Math.random(),
       amount: Number(data.amount),
-      category: data.category,
+      category: categoryData,
       name: data.name,
       description: data.description,
       date: data.dob,
@@ -94,14 +100,6 @@ const AddPayment = ({
     setOpen(false)
   }
 
-  const categories = [
-    { id: "1", name: "Comida" },
-    { id: "2", name: "Servicios públicos" },
-    { id: "3", name: "Entretenimiento" },
-    { id: "4", name: "Educación" },
-    { id: "5", name: "Viajes" },
-  ]
-
   return (
     <Dialog onOpenChange={setOpen} open={open}>
       <DialogTrigger asChild>
@@ -111,9 +109,10 @@ const AddPayment = ({
             form.reset()
             setOpen(true)
           }}
-          className={cn(className)}
+          className={cn(className, "space-x-2")}
         >
-          + Agregar Gastos
+          <PlusCircle className="w-5 h-5" />
+          <span className="text-sm font-medium">Agregar Gastos</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]" aria-describedby="dialog-content">
