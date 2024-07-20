@@ -1,5 +1,5 @@
 import { Category } from "@/types/category-type"
-import { Payment } from "@/types/payment-type"
+import { Payment } from "@/types/expense-type"
 
 const getMonthlyBreakdown = (data: Payment[]) => {
   return Object.values(
@@ -18,4 +18,5 @@ const getMonthlyBreakdown = (data: Payment[]) => {
     )
   ).map(({ name, amount, id }) => ({ name, amount, id }))
 }
+
 export default getMonthlyBreakdown

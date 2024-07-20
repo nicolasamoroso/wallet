@@ -3,7 +3,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 
 import { Card } from "@/types/card-type"
-import { Payment } from "@/types/payment-type"
+import { Expense } from "@/types/expense-type"
 import CalculateCurrentBalances from "@/hooks/calculate-current-balances"
 import CalculateCurrentSpents from "@/hooks/calculate-current-spents"
 import CanHaveChart from "@/hooks/can-have-chart"
@@ -18,7 +18,7 @@ const Dashboard = ({
 }: {
   budgets: Card[]
   accountId: string
-  payments: Payment[]
+  payments: Expense[]
 }) => {
   const [budgetsPerMonth, setBudgetsPerMonth] = useState<Card[]>([])
   const [spentsPerMonth, setSpentsPerMonth] = useState<Card[]>([])

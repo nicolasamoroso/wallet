@@ -1,4 +1,4 @@
-import { Payment } from "@/types/payment-type"
+import { Payment } from "@/types/expense-type"
 
 const getMonthlyPayments = ({ payments }: { payments: Payment[] }): Payment[] => {
   return payments.reduce((acc, item) => {

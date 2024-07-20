@@ -1,7 +1,7 @@
 import { Category } from "@/types/category-type"
 
-export type Payment = {
-  id: string
+export type Expense = {
+  id?: string
   category: Category
   name: string
   description: string

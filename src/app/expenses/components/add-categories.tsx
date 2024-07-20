@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react"
+import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { PlusCircle, TagIcon } from "lucide-react"
 import { useForm } from "react-hook-form"
@@ -39,10 +39,10 @@ const FormSchema = z.object({
 
 const AddCategories = ({
   categories,
-  setCategories,
+  addCategory,
 }: {
   categories: Category[]
-  setCategories: Dispatch<SetStateAction<Category[]>>
+  addCategory: (newCategory: Category) => void
 }) => {
   const [open, setOpen] = useState(false)
   const [color, setColor] = useState("#fecaca")
@@ -63,7 +63,6 @@ const AddCategories = ({
     })
 
     const category = {
-      id: categories.length + 1,
       name: data.name,
       color: data.color,
       textColor: data.textColor,
@@ -79,8 +78,7 @@ const AddCategories = ({
       return
     }
 
-    setCategories([...categories, category])
-    localStorage.setItem("category", JSON.stringify([...categories, category]))
+    addCategory(category)
 
     form.reset()
 
@@ -88,135 +86,133 @@ const AddCategories = ({
   }
 
   return (
-    <>
-      <Dialog onOpenChange={setOpen} open={open}>
-        <DialogTrigger asChild>
-          <Button
-            variant="default"
-            onClick={() => {
-              form.reset()
-              setOpen(true)
-              setName("")
-              setColor("#fecaca")
-              setTextColor("#991b1b")
-            }}
-            className="space-x-2"
+    <Dialog onOpenChange={setOpen} open={open}>
+      <DialogTrigger asChild>
+        <Button
+          variant="default"
+          onClick={() => {
+            form.reset()
+            setOpen(true)
+            setName("")
+            setColor("#fecaca")
+            setTextColor("#991b1b")
+          }}
+          className="space-x-2"
+        >
+          <PlusCircle className="w-5 h-5" />
+          <span className="text-sm font-medium">Crear categoría</span>
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]" aria-describedby="dialog-content">
+        <DialogHeader>
+          <DialogTitle className="pb-7">Crear una nueva categoría</DialogTitle>
+        </DialogHeader>
+        <p id="dialog-description" className="sr-only">
+          Rellene el formulario para poder crear.
+        </p>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="col-span-9"
+            aria-describedby="dialog-description"
           >
-            <PlusCircle className="w-5 h-5" />
-            <span className="text-sm font-medium">Crear categoría</span>
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]" aria-describedby="dialog-content">
-          <DialogHeader>
-            <DialogTitle className="pb-7">Crear una nueva categoría</DialogTitle>
-          </DialogHeader>
-          <p id="dialog-description" className="sr-only">
-            Rellene el formulario para poder crear.
-          </p>
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="col-span-9"
-              aria-describedby="dialog-description"
-            >
-              <div className="grid grid-cols-12 gap-3 mb-3">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-col col-span-6 gap-2">
-                      <FormLabel htmlFor="name">Nombre</FormLabel>
-                      <FormControl>
-                        <Input
-                          id="name"
-                          type="text"
-                          onChange={field.onChange}
-                          onBlur={field.onBlur}
-                          className="w-full bg-input-background"
-                          placeholder="Comida"
-                          onInput={(e) => {
-                            const input = e.target as HTMLInputElement
-                            setName(input.value)
-                          }}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="color"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-col col-span-6 gap-2">
-                      <FormLabel htmlFor="color">Color de fondo</FormLabel>
-                      <FormControl>
-                        <Input
-                          id="color"
-                          type="color"
-                          name="color"
-                          value={field.value}
-                          onChange={field.onChange}
-                          onBlur={field.onBlur}
-                          className="w-full bg-input-background"
-                          placeholder="100"
-                          onInput={(e) => {
-                            const input = e.target as HTMLInputElement
-                            setColor(input.value)
-                          }}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="textColor"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-col col-span-6 gap-2">
-                      <FormLabel htmlFor="textColor">Color del texto</FormLabel>
-                      <FormControl>
-                        <Input
-                          id="textColor"
-                          type="color"
-                          value={field.value}
-                          onChange={field.onChange}
-                          onBlur={field.onBlur}
-                          className="w-full bg-input-background"
-                          placeholder="100"
-                          onInput={(e) => {
-                            const input = e.target as HTMLInputElement
-                            setTextColor(input.value)
-                          }}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+            <div className="grid grid-cols-12 gap-3 mb-3">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col col-span-6 gap-2">
+                    <FormLabel htmlFor="name">Nombre</FormLabel>
+                    <FormControl>
+                      <Input
+                        id="name"
+                        type="text"
+                        onChange={field.onChange}
+                        onBlur={field.onBlur}
+                        className="w-full bg-input-background"
+                        placeholder="Comida"
+                        onInput={(e) => {
+                          const input = e.target as HTMLInputElement
+                          setName(input.value)
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="color"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col col-span-6 gap-2">
+                    <FormLabel htmlFor="color">Color de fondo</FormLabel>
+                    <FormControl>
+                      <Input
+                        id="color"
+                        type="color"
+                        name="color"
+                        value={field.value}
+                        onChange={field.onChange}
+                        onBlur={field.onBlur}
+                        className="w-full bg-input-background"
+                        placeholder="100"
+                        onInput={(e) => {
+                          const input = e.target as HTMLInputElement
+                          setColor(input.value)
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="textColor"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col col-span-6 gap-2">
+                    <FormLabel htmlFor="textColor">Color del texto</FormLabel>
+                    <FormControl>
+                      <Input
+                        id="textColor"
+                        type="color"
+                        value={field.value}
+                        onChange={field.onChange}
+                        onBlur={field.onBlur}
+                        className="w-full bg-input-background"
+                        placeholder="100"
+                        onInput={(e) => {
+                          const input = e.target as HTMLInputElement
+                          setTextColor(input.value)
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            {name !== "" && (
+              <div>
+                <span
+                  className="px-2 py-1 bg-red-200 text-red-800 rounded-md flex items-center gap-2 w-fit"
+                  style={{ backgroundColor: color, color: textColor }}
+                >
+                  <TagIcon className="w-4 h-4" />
+                  {name}
+                </span>
               </div>
-              {name !== "" && (
-                <div>
-                  <span
-                    className="px-2 py-1 bg-red-200 text-red-800 rounded-md flex items-center gap-2 w-fit"
-                    style={{ backgroundColor: color, color: textColor }}
-                  >
-                    <TagIcon className="w-4 h-4" />
-                    {name}
-                  </span>
-                </div>
-              )}
-              <DialogFooter>
-                <Button type="submit" className="mt-4 md:mt-0">
-                  Crear
-                </Button>
-              </DialogFooter>
-            </form>
-          </Form>
-        </DialogContent>
-      </Dialog>
-    </>
+            )}
+            <DialogFooter>
+              <Button type="submit" className="mt-4 md:mt-0">
+                Crear
+              </Button>
+            </DialogFooter>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
   )
 }
 

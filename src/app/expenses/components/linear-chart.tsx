@@ -1,6 +1,6 @@
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
 
-import { Payment } from "@/types/payment-type"
+import { Expense } from "@/types/expense-type"
 import capitalizeFirstLetter from "@/hooks/capitalize-first-letter"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
@@ -10,7 +10,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 
-const LinearChart = ({ data }: { data: Payment[] }) => {
+const LinearChart = ({ data }: { data: Expense[] }) => {
   const chartConfig = {
     amount: {
       label: "Amount",
@@ -18,17 +18,21 @@ const LinearChart = ({ data }: { data: Payment[] }) => {
     },
   } satisfies ChartConfig
 
-  const newData = data.map((item) => {
-    const date = new Date(item.date)
-    const formattedDay = new Intl.DateTimeFormat("es-AR", { day: "2-digit" }).format(date)
-    const formattedMonth = new Intl.DateTimeFormat("es-AR", { month: "short" }).format(
-      date
-    )
-    const capitalizedMonth = capitalizeFirstLetter(formattedMonth)
+  const newData = data
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .map((item) => {
+      const date = new Date(item.date)
+      const formattedDay = new Intl.DateTimeFormat("es-AR", { day: "2-digit" }).format(
+        date
+      )
+      const formattedMonth = new Intl.DateTimeFormat("es-AR", { month: "short" }).format(
+        date
+      )
+      const capitalizedMonth = capitalizeFirstLetter(formattedMonth)
 
-    const formattedDate = `${formattedDay} ${capitalizedMonth}`
-    return { ...item, date: formattedDate }
-  })
+      const formattedDate = `${formattedDay} ${capitalizedMonth}`
+      return { ...item, date: formattedDate }
+    })
 
   return (
     <Card className="min-h-[200px] w-full col-span-3 lg:col-span-2 h-fit">

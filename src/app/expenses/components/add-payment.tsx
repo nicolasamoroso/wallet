@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 import { Category } from "@/types/category-type"
-import { Payment } from "@/types/payment-type"
+import { Expense } from "@/types/expense-type"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -58,13 +58,12 @@ const FormSchema = z.object({
 
 const AddPayment = ({
   className,
-  payments,
-  setData,
+  addExpense,
   categories,
 }: {
   className?: string
-  payments: Payment[]
-  setData: Dispatch<SetStateAction<any[]>>
+  payments: Expense[]
+  addExpense: (newExpense: Expense) => void
   categories: Category[]
 }) => {
   const [open, setOpen] = useState(false)
@@ -81,19 +80,15 @@ const AddPayment = ({
       title: "Gasto agregado",
     })
 
-    const categoryData = categories.find((cat) => cat.name === data.category) as Category
-
     const payment = {
-      id: "1" + Math.random(),
       amount: Number(data.amount),
-      category: categoryData,
+      category: categories.find((cat) => cat.name === data.category) as Category,
       name: data.name,
       description: data.description,
       date: data.dob,
-    } as Payment
+    } as Expense
 
-    setData([...payments, payment])
-    localStorage.setItem("payments", JSON.stringify([...payments, payment]))
+    addExpense(payment)
 
     form.reset()
 

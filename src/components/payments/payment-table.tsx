@@ -14,7 +14,7 @@ import {
   VisibilityState,
 } from "@tanstack/react-table"
 
-import { Payment } from "@/types/payment-type"
+import { Payment } from "@/types/expense-type"
 import getMonthlyPayments from "@/hooks/get-monthly-payments"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"

@@ -15,7 +15,7 @@ import {
 } from "@tanstack/react-table"
 
 import { Category } from "@/types/category-type"
-import { Payment } from "@/types/payment-type"
+import { Expense } from "@/types/expense-type"
 import getMonthlyPayments from "@/hooks/get-monthly-payments"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -27,20 +27,20 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import AddPayment from "@/components/payments/add-payment"
 import Menu from "@/components/payments/menu"
+import AddPayment from "@/app/expenses/components/add-payment"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  setData: Dispatch<SetStateAction<any[]>>
+  addExpense: (newExpense: Expense) => void
   categories: Category[]
 }
 
 export default function PaymentTable<TData, TValue>({
   columns,
   data,
-  setData,
+  addExpense,
   categories,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
@@ -54,7 +54,7 @@ export default function PaymentTable<TData, TValue>({
     setIsLoading(true)
 
     const monthlyPayments = getMonthlyPayments({
-      payments: data as Payment[],
+      payments: data as Expense[],
     }) as TData[]
 
     setPayments(monthlyPayments)
@@ -84,8 +84,8 @@ export default function PaymentTable<TData, TValue>({
         <div className="text-end col-span-2 lg:hidden">
           <AddPayment
             className="w-full"
-            payments={data as Payment[]}
-            setData={setData}
+            payments={data as Expense[]}
+            addExpense={addExpense}
             categories={categories}
           />
         </div>
@@ -111,8 +111,8 @@ export default function PaymentTable<TData, TValue>({
         <Menu setFilter={setFilter} filter={filter} />
         <div className="text-end hidden col-span-1 lg:block">
           <AddPayment
-            payments={data as Payment[]}
-            setData={setData}
+            payments={data as Expense[]}
+            addExpense={addExpense}
             categories={categories}
           />
         </div>
