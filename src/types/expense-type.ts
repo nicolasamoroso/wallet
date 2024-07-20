@@ -1,10 +1,12 @@
 import { Category } from "@/types/category-type"
 
-export type Payment = {
-  id: string
+interface Expense {
+  id?: string
   category: Category
   name: string
   description: string
   amount: number
   date: Date
 }
+
+export type { Expense }

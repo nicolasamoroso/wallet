@@ -1,15 +1,11 @@
-import { Payment } from "@/types/payment-type"
+import { Breakdown } from "@/types/breakdown-type"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-const Breakdown = ({
+const BreakdownTable = ({
   data,
   className,
 }: {
-  data: {
-    name: string
-    amount: number
-    id: number
-  }[]
+  data: Breakdown[]
   className?: string
 }) => {
   return (
@@ -22,13 +18,7 @@ const Breakdown = ({
           {data && data.length > 0 ? (
             data.map(({ name, amount, id }) => (
               <div key={id} className="flex flex-col">
-                <div className="text-lg font-semibold">
-                  $
-                  {amount.toLocaleString("es-AR", {
-                    minimumFractionDigits: 1,
-                    maximumFractionDigits: 1,
-                  })}
-                </div>
+                <div className="text-lg font-semibold">${amount}</div>
                 <div className="text-sm text-muted-foreground">{name}</div>
               </div>
             ))
@@ -41,4 +31,4 @@ const Breakdown = ({
   )
 }
 
-export default Breakdown
+export default BreakdownTable

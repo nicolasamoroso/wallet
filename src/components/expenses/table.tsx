@@ -14,8 +14,8 @@ import {
   VisibilityState,
 } from "@tanstack/react-table"
 
-import { Payment } from "@/types/payment-type"
-import getMonthlyPayments from "@/hooks/get-monthly-payments"
+import { Category } from "@/types/category-type"
+import { Expense } from "@/types/expense-type"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -26,19 +26,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import AddPayment from "@/components/payments/add-payment"
-import Menu from "./menu"
+import AddPayment from "@/components/expenses/add-payment"
+import Menu from "@/components/expenses/menu"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  setData: Dispatch<SetStateAction<any[]>>
+  addExpense: (newExpense: Expense) => void
+  categories: Category[]
 }
 
-export function PaymentTable<TData, TValue>({
+export default function PaymentTable<TData, TValue>({
   columns,
   data,
-  setData,
+  addExpense,
+  categories,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
@@ -50,13 +52,6 @@ export function PaymentTable<TData, TValue>({
   useEffect(() => {
     setIsLoading(true)
 
-    const monthlyPayments = getMonthlyPayments({
-      payments: data as Payment[],
-      // month: new Date().getMonth(),
-      // year: new Date().getFullYear(),
-    }) as TData[]
-
-    setPayments(monthlyPayments)
     setIsLoading(false)
   }, [data])
 
@@ -78,10 +73,15 @@ export function PaymentTable<TData, TValue>({
   })
 
   return (
-    <>
+    <div className="flex flex-col gap-3 col-span-3 pt-8">
       <div className="flex flex-col xs:flex-auto xs:grid xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 col-span-3">
         <div className="text-end col-span-2 lg:hidden">
-          {/* <AddPayment className="w-full" payments={data as Payment[]} setData={setData} /> */}
+          <AddPayment
+            className="w-full"
+            payments={data as Expense[]}
+            addExpense={addExpense}
+            categories={categories}
+          />
         </div>
 
         <Input
@@ -93,9 +93,9 @@ export function PaymentTable<TData, TValue>({
                 : "cantidades..."
           }`}
           value={
-            (filter
-              ? (table.getColumn(filter.toLowerCase())?.getFilterValue() as string)
-              : "") ?? ""
+            (filter?.toLowerCase() &&
+              (table.getColumn(filter.toLowerCase())?.getFilterValue() as string)) ??
+            ""
           }
           onChange={(event) => {
             if (filter) {
@@ -106,7 +106,11 @@ export function PaymentTable<TData, TValue>({
         />
         <Menu setFilter={setFilter} filter={filter} />
         <div className="text-end hidden col-span-1 lg:block">
-          {/* <AddPayment payments={data as Payment[]} setData={setData} /> */}
+          <AddPayment
+            payments={data as Expense[]}
+            addExpense={addExpense}
+            categories={categories}
+          />
         </div>
       </div>
       <div className="rounded-t-md border bg-secondary">
@@ -123,7 +127,7 @@ export function PaymentTable<TData, TValue>({
                     return (
                       <TableHead
                         key={header.id}
-                        className="text-primary font-semibold rounded-md"
+                        className="text-primary font-semibold rounded-md px-4"
                       >
                         {header.isPlaceholder
                           ? null
@@ -142,7 +146,7 @@ export function PaymentTable<TData, TValue>({
                 table.getRowModel().rows.map((row) => (
                   <TableRow key={row.id}>
                     {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id} className="bg-primary-foreground">
+                      <TableCell key={cell.id} className="bg-primary-foreground px-4">
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>
                     ))}
@@ -183,6 +187,6 @@ export function PaymentTable<TData, TValue>({
           Siguiente
         </Button>
       </div>
-    </>
+    </div>
   )
 }

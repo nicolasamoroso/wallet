@@ -1,11 +1,10 @@
-import { Dispatch, SetStateAction, useState } from "react"
+import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { PlusCircle } from "lucide-react"
+import { PlusCircle, TagIcon } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 import { Category } from "@/types/category-type"
-import { Payment } from "@/types/payment-type"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -24,76 +23,67 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
-import DatePicker from "@/components/payments/date-picker"
-import { cn } from "@/utils/clsx"
 
 const FormSchema = z.object({
   name: z.string({
     required_error: "Debe ingresar un nombre.",
   }),
-  dob: z.date({
-    required_error: "Debe seleccionar una fecha.",
+  color: z.string({
+    required_error: "Debe seleccionar un color de fondo.",
   }),
-  amount: z.string({
-    required_error: "Debe ingresar una cantidad.",
-  }),
-  description: z
-    .string({
-      required_error: "Debe ingresar una descripción.",
-    })
-    .optional(),
-  category: z.string({
-    required_error: "Debe ingresar una categoría.",
+  textColor: z.string({
+    required_error: "Debe seleccionar un color de texto.",
   }),
 })
 
-const AddPayment = ({
-  className,
-  payments,
-  setData,
+const AddCategories = ({
   categories,
+  addCategory,
 }: {
-  className?: string
-  payments: Payment[]
-  setData: Dispatch<SetStateAction<any[]>>
   categories: Category[]
+  addCategory: (newCategory: Category) => void
 }) => {
   const [open, setOpen] = useState(false)
+  const [color, setColor] = useState("#fecaca")
+  const [textColor, setTextColor] = useState("#991b1b")
+  const [name, setName] = useState("")
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      description: "",
+      color: "#fecaca",
+      textColor: "#991b1b",
     },
   })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
-      title: "Gasto agregado",
+      title: "Categoría creada",
     })
 
-    const categoryData = categories.find((cat) => cat.name === data.category) as Category
-
-    const payment = {
-      id: "1" + Math.random(),
-      amount: Number(data.amount),
-      category: categoryData,
+    const category = {
       name: data.name,
-      description: data.description,
-      date: data.dob,
-    } as Payment
+      color: data.color,
+      textColor: data.textColor,
+    } as Category
 
-    setData([...payments, payment])
-    localStorage.setItem("payments", JSON.stringify([...payments, payment]))
+    if (
+      categories.some(
+        (cat) =>
+          cat.name &&
+          category.name &&
+          cat.name.toLowerCase() === category.name.toLowerCase()
+      )
+    ) {
+      toast({
+        title: "La categoría ya existe",
+        description: "Por favor, ingrese una categoría diferente.",
+      })
+      return
+    }
+
+    addCategory(category)
 
     form.reset()
 
@@ -108,19 +98,22 @@ const AddPayment = ({
           onClick={() => {
             form.reset()
             setOpen(true)
+            setName("")
+            setColor("#fecaca")
+            setTextColor("#991b1b")
           }}
-          className={cn(className, "space-x-2")}
+          className="space-x-2"
         >
           <PlusCircle className="w-5 h-5" />
-          <span className="text-sm font-medium">Agregar Gastos</span>
+          <span className="text-sm font-medium">Crear categoría</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]" aria-describedby="dialog-content">
         <DialogHeader>
-          <DialogTitle className="pb-7">Agregar nuevo gasto</DialogTitle>
+          <DialogTitle className="pb-7">Crear una nueva categoría</DialogTitle>
         </DialogHeader>
         <p id="dialog-description" className="sr-only">
-          Rellene el formulario para poder agregar.
+          Rellene el formulario para poder crear.
         </p>
         <Form {...form}>
           <form
@@ -129,34 +122,6 @@ const AddPayment = ({
             aria-describedby="dialog-description"
           >
             <div className="grid grid-cols-12 gap-3 mb-3">
-              <FormField
-                control={form.control}
-                name="category"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col col-span-6 gap-2">
-                    <FormLabel htmlFor="category">Categoría</FormLabel>
-                    <FormControl>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <SelectTrigger className="w-full bg-input-background">
-                          <SelectValue id="category" placeholder="Categoría" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {categories.map((category) => (
-                            <SelectItem
-                              className="cursor-pointer"
-                              key={category.id}
-                              value={category.name}
-                            >
-                              {category.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
               <FormField
                 control={form.control}
                 name="name"
@@ -170,7 +135,11 @@ const AddPayment = ({
                         onChange={field.onChange}
                         onBlur={field.onBlur}
                         className="w-full bg-input-background"
-                        placeholder="Pizza"
+                        placeholder="Comida"
+                        onInput={(e) => {
+                          const input = e.target as HTMLInputElement
+                          setName(input.value)
+                        }}
                       />
                     </FormControl>
                     <FormMessage />
@@ -179,23 +148,24 @@ const AddPayment = ({
               />
               <FormField
                 control={form.control}
-                name="dob"
-                render={({ field }) => <DatePicker field={field} />}
-              />
-              <FormField
-                control={form.control}
-                name="amount"
+                name="color"
                 render={({ field }) => (
                   <FormItem className="flex flex-col col-span-6 gap-2">
-                    <FormLabel htmlFor="amount">Cantidad</FormLabel>
+                    <FormLabel htmlFor="color">Color de fondo</FormLabel>
                     <FormControl>
                       <Input
-                        id="amount"
-                        type="text"
+                        id="color"
+                        type="color"
+                        name="color"
+                        value={field.value}
                         onChange={field.onChange}
                         onBlur={field.onBlur}
                         className="w-full bg-input-background"
                         placeholder="100"
+                        onInput={(e) => {
+                          const input = e.target as HTMLInputElement
+                          setColor(input.value)
+                        }}
                       />
                     </FormControl>
                     <FormMessage />
@@ -204,16 +174,23 @@ const AddPayment = ({
               />
               <FormField
                 control={form.control}
-                name="description"
+                name="textColor"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col gap-2 col-span-12">
-                    <FormLabel htmlFor="description">Descripción</FormLabel>
+                  <FormItem className="flex flex-col col-span-6 gap-2">
+                    <FormLabel htmlFor="textColor">Color del texto</FormLabel>
                     <FormControl>
-                      <Textarea
-                        placeholder="Pizza de La Cancha"
-                        className="resize-none bg-input-background"
+                      <Input
+                        id="textColor"
+                        type="color"
+                        value={field.value}
                         onChange={field.onChange}
                         onBlur={field.onBlur}
+                        className="w-full bg-input-background"
+                        placeholder="100"
+                        onInput={(e) => {
+                          const input = e.target as HTMLInputElement
+                          setTextColor(input.value)
+                        }}
                       />
                     </FormControl>
                     <FormMessage />
@@ -221,8 +198,21 @@ const AddPayment = ({
                 )}
               />
             </div>
+            {name !== "" && (
+              <div>
+                <span
+                  className="px-2 py-1 bg-red-200 text-red-800 rounded-md flex items-center gap-2 w-fit"
+                  style={{ backgroundColor: color, color: textColor }}
+                >
+                  <TagIcon className="w-4 h-4" />
+                  {name}
+                </span>
+              </div>
+            )}
             <DialogFooter>
-              <Button type="submit">Agregar</Button>
+              <Button type="submit" className="mt-4 md:mt-0">
+                Crear
+              </Button>
             </DialogFooter>
           </form>
         </Form>
@@ -231,4 +221,4 @@ const AddPayment = ({
   )
 }
 
-export default AddPayment
+export default AddCategories

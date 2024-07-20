@@ -9,7 +9,7 @@ import {
 } from "lucide-react"
 
 import { Category } from "@/types/category-type"
-import { Payment } from "@/types/payment-type"
+import { Expense } from "@/types/expense-type"
 import capitalizeFirstLetter from "@/hooks/capitalize-first-letter"
 import { Button } from "@/components/ui/button"
 import {
@@ -19,7 +19,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Expense>[] = [
   {
     accessorKey: "date",
     header: "Fecha",

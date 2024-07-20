@@ -1,4 +1,3 @@
-import { bg } from "date-fns/locale"
 import type { Config } from "tailwindcss"
 
 const config: Config = {
