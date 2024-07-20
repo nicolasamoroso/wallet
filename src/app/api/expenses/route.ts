@@ -5,10 +5,19 @@ import { expenses } from "@/app/api/expenses/expenses"
 
 /* GET : /api/expenses/
  */
-export async function GET() {
-  return Response.json(expenses)
-}
+/* GET : /api/expenses/by-date?from=YYYY-MM-DD&to=YYYY-MM-DD
+ */
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url)
+  const from = searchParams.get("from")
+  const to = searchParams.get("to")
 
+  if (from && to) {
+    return filterExpensesByDate(req)
+  }
+
+  return NextResponse.json(expenses)
+}
 /* POST : /api/expenses/
   Content-Type: application/json
   Body: {
@@ -71,11 +80,11 @@ export async function DELETE(req: NextRequest) {
   return NextResponse.json({ id })
 }
 
-/* GET : /api/expenses/by-date?from=YYYY-MM-DD&to=YYYY-MM-DD
- */
-export async function GETExpensesByDate(req: NextRequest) {
-  const from = req.nextUrl.searchParams.get("from")
-  const to = req.nextUrl.searchParams.get("to")
+/* Función para manejar el filtrado por fecha */
+async function filterExpensesByDate(req: NextRequest) {
+  const { searchParams } = new URL(req.url)
+  const from = searchParams.get("from")
+  const to = searchParams.get("to")
 
   if (!from || !to) {
     return NextResponse.json(
