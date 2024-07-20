@@ -21,7 +21,7 @@ const DonutChart = ({
       label: "Cantidad",
     },
     ...data.reduce((config, item, index) => {
-      const categoryKey = item.category ? item.category.toLowerCase() : "other"
+      const categoryKey = item.category ? item.category.toLowerCase() : "error"
       return {
         ...config,
         [categoryKey]: {
