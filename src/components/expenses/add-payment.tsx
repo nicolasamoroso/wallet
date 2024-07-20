@@ -33,7 +33,7 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
-import DatePicker from "@/components/payments/date-picker"
+import DatePicker from "@/components/expenses/date-picker"
 import { cn } from "@/utils/clsx"
 
 const FormSchema = z.object({

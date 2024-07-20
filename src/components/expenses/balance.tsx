@@ -2,7 +2,7 @@ import { TrendingUpIcon } from "lucide-react"
 
 import { Breakdown } from "@/types/breakdown-type"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import DonutChart from "@/app/expenses/components/donut-chart"
+import DonutChart from "@/components/expenses/donut-chart"
 import { cn } from "@/utils/clsx"
 
 const Balance = ({ data, className }: { data: Breakdown[]; className?: string }) => {

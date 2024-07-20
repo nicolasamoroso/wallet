@@ -27,8 +27,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import Menu from "@/components/payments/menu"
-import AddPayment from "@/app/expenses/components/add-payment"
+import AddPayment from "@/components/expenses/add-payment"
+import Menu from "@/components/expenses/menu"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 
 import useGetData from "@/hooks/use-get-payment-data"
 import BalanceCard from "@/components/balance/balance-card"
-import { columns } from "@/components/payments/columns"
+import { columns } from "@/components/expenses/columns"
 import { PaymentTable } from "@/components/payments/payment-table"
 
 export default function Home() {
