@@ -16,7 +16,6 @@ import {
 
 import { Category } from "@/types/category-type"
 import { Expense } from "@/types/expense-type"
-import getMonthlyPayments from "@/hooks/get-monthly-payments"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -53,11 +52,6 @@ export default function PaymentTable<TData, TValue>({
   useEffect(() => {
     setIsLoading(true)
 
-    const monthlyPayments = getMonthlyPayments({
-      payments: data as Expense[],
-    }) as TData[]
-
-    setPayments(monthlyPayments)
     setIsLoading(false)
   }, [data])
 
