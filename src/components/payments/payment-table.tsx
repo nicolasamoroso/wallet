@@ -14,7 +14,7 @@ import {
   VisibilityState,
 } from "@tanstack/react-table"
 
-import { Payment } from "@/types/expense-type"
+import { Expense } from "@/types/expense-type"
 import getMonthlyPayments from "@/hooks/get-monthly-payments"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -26,7 +26,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import AddPayment from "@/components/payments/add-payment"
 import Menu from "./menu"
 
 interface DataTableProps<TData, TValue> {
@@ -51,7 +50,7 @@ export function PaymentTable<TData, TValue>({
     setIsLoading(true)
 
     const monthlyPayments = getMonthlyPayments({
-      payments: data as Payment[],
+      payments: data as Expense[],
       // month: new Date().getMonth(),
       // year: new Date().getFullYear(),
     }) as TData[]
